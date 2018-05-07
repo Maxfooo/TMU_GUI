@@ -159,10 +159,6 @@ private slots:
 
     void updateDataInfo();
 
-    void on_actionSave_UI_State_triggered();
-
-    void on_actionLoad_UI_State_triggered();
-
 public slots:
     void updateDirectGUI();
     void updateDataGUI(USB_READBACK_TYPE);

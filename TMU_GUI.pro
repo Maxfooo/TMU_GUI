@@ -56,6 +56,7 @@ DISTFILES += \
     ftd2xx.lib \
     ftd2xx64.dll \
     SaveMyUI_README.txt \
+    TestingComm.xml \
     ConfigFileNames.txt
 
 RESOURCES += \

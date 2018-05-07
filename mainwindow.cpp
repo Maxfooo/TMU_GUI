@@ -28,14 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     decValidator = new QRegExpValidator(QRegExp("^[0-9]+$"),this); // only allow integers
     floatValidator = new QRegExpValidator(QRegExp("^[0-9\\.]+$"),this); //only allow dec/float Values into validator
 
-
-
-    /****** INIT COMBO BOXES ******/
-    initGeneralConfigTab();
-    initTempCycleTab();
-    initAdvancedTab();
-
-
     #ifdef DEBUG
         CONFIG_FILE_PREFIX.replace("build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/debug", "");
         qDebug() << "Application File Path: " << CONFIG_FILE_PREFIX;
@@ -45,6 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mySettings.prepend(CONFIG_FILE_PREFIX);
     CONFIG_FILE_NAMES_FILE_NAME.prepend(CONFIG_FILE_PREFIX);
     saveMyUI = new SaveMyUI(this, mySettings);
+
+    /****** INIT COMBO BOXES ******/
+    initGeneralConfigTab();
+    initTempCycleTab();
+    initAdvancedTab();
 
 }
 
@@ -94,30 +91,38 @@ void MainWindow::updateDataGUI(USB_READBACK_TYPE readbackType)
     switch(readbackType)
     {
     case READBACK_DIRECT:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_DATA:
         updateDataInfo();
         break;
     case READBACK_CHIP_INFO:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_STATUS:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_LAST_PACKET:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_INPUT_BUFFER:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_DEBUG_VAR:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_FLUSH_OUTPUT:
+        debugReadback();
         //updateDirectInfo();
         break;
     case READBACK_FLUSH_INPUT:
+        debugReadback();
         //updateDirectInfo();
         break;
     default:
@@ -263,6 +268,10 @@ void MainWindow::detectTMURead()
     uchar cmdByte;
     hxUSBComm->getReadbackData(&cmdByte, rxBuffer, &numRxBytes);
 
+#ifdef DEBUG
+    qDebug() << "Detect TMU Readback: " << HxUtils::ucharArrayToQString(rxBuffer, numRxBytes);
+#endif
+
     if (numRxBytes >= 3)
     {
         tmu->setAsicRev(rxBuffer[1]);
@@ -280,7 +289,7 @@ void MainWindow::TMUDetected(bool d)
     if (d)
     {
         ui->label_28->setText("Yes");
-        ui->label_38->setText(QString::number(tmu->getAsicRev()));
+        ui->label_38->setText(QString::number(tmu->getAsicRev(), 16));
     }
     else
     {
@@ -300,7 +309,7 @@ void MainWindow::debugReadback()
     uchar numRxBytes;
     uchar cmdByte;
     hxUSBComm->getReadbackData(&cmdByte, rxBuffer, &numRxBytes);
-    qDebug() << utils::ucharArrayToQString(rxBuffer, numRxBytes);
+    qDebug() << "DEBUG READBACK: " << utils::ucharArrayToQString(rxBuffer, numRxBytes);
 }
 /**************************************/
 //
@@ -420,8 +429,6 @@ void MainWindow::enableEHBox(bool nmosOrNpn)
     ui->lineEdit_15->setEnabled(true);
     ui->lineEdit_16->setEnabled(true);
     ui->groupBox_4->setEnabled(false);
-    ui->lineEdit_15->setText("");
-    ui->lineEdit_16->setText("");
     tmu->setIntOrExtHeater(SET_EXTERNAL_HEATER);
     tmu->setEHTransistor(nmosOrNpn);
 
@@ -971,7 +978,7 @@ void MainWindow::on_pushButton_11_clicked() // Overwrite Configuation PB
 {
     QString saveKey = ui->comboBox_4->itemText(ui->comboBox_4->currentIndex());
     saveKey = saveKey.contains(".xml") ? saveKey : saveKey + ".xml";
-    saveMyUI->saveToXML(saveKey);
+    saveMyUI->saveToXML(CONFIG_FILE_PREFIX + saveKey);
 }
 
 void MainWindow::on_pushButton_12_clicked() // Save As... (config) PB
@@ -1061,7 +1068,8 @@ void MainWindow::loadConfigFileNames()
         return;
     }
     QTextStream in(&file);
-    in >> temp;
+    temp = in.readAll();
+    qDebug() << "Load config file data: " << temp;
     ui->comboBox_4->clear();
     if (!temp.isEmpty())
     {
@@ -1122,12 +1130,12 @@ void MainWindow::on_radioButton_9_clicked() // Vref Disable
 
 void MainWindow::on_pushButton_14_clicked() // Detect TMU (Adv. Tab)
 {
-
+    detectTMUWrite();
 }
 
 void MainWindow::on_pushButton_15_clicked() // Load Registers From Configuration (Adv. Tab)
 {
-
+    writeRegFromInterface();
 }
 
 void MainWindow::on_pushButton_16_clicked() // Operate from Registers (Adv. Tab)
@@ -1257,12 +1265,4 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
     ui->textBrowser->setText(info_thermalParameters);
 }
 
-void MainWindow::on_actionSave_UI_State_triggered()
-{
-    saveMyUI->saveToXML();
-}
 
-void MainWindow::on_actionLoad_UI_State_triggered()
-{
-    saveMyUI->loadFromXML();
-}

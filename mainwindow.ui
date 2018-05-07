@@ -1975,8 +1975,6 @@ font-style:italic;
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave_UI_State"/>
-    <addaction name="actionLoad_UI_State"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">

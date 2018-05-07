@@ -70,7 +70,9 @@ OBJECTS       = release/main.o \
 DIST          = TO_DO.txt \
 		ftd2xx.lib \
 		ftd2xx64.dll \
-		SaveMyUI_README.txt ..\mainwindow.h \
+		SaveMyUI_README.txt \
+		TestingComm.xml \
+		ConfigFileNames.txt ..\mainwindow.h \
 		..\hx_commstd.h \
 		..\hxusbcomm.h \
 		..\hxusbcommworker.h \
