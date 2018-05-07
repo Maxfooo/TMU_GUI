@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Hexius_logo_resize.png</file>
+        <file>hexius_semicondutor_favicon_transparent.ico</file>
+    </qresource>
+</RCC>

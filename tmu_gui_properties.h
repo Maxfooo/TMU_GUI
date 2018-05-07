@@ -1,0 +1,8 @@
+#ifndef TMU_GUI_PROPERTIES_H
+#define TMU_GUI_PROPERTIES_H
+
+#define DEBUG
+//#undef DEBUG
+#define _COMM_DEBUG_ENABLED
+
+#endif // TMU_GUI_PROPERTIES_H

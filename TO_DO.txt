@@ -1,0 +1,75 @@
+--------------------------------------
+ACTION ITEMS FOR GUI
+--------------------------------------
+
++ THERMISTOR CALCULATIONS
+-- Given Temperature, calculate Range Resistor
+>> Using curve information provided by Henry
+>> Not calculating limits if they use an external range resistor
+-- Take in Thermal Parameters
+
++ COMMUNICATIONS
+
++ EXTERNAL HEATER
+-- Some unfinished calculations
+-- Option for using external range resistor
+>> Set internal range resistor to 0 Ohms
+
+
++ MUX (Everything is read through via the ADC)
+-- Read (convert) Button
+>> Volts (0 - 2.9) or Current *Based on Channel Selected
+>> Decimal (0 - 4095)
+>> Hex
+
+-----------------------------------
+DEMO IDEAS
+-----------------------------------
++ Xtal - Temp co
++ Temp Cycle
++ Gradient Control
++ Heat Patch (medical)
+
+-----------------------------------
+EXTRA - RANGE RESISTOR + THERMISTOR VOLTAGE DIVIDER
+-----------------------------------
+
+"Init resTarget = 7550.51"
+/*
+double vdd = 2.9;
+double therm1 = 100000;
+double therm2 = 7550.51;
+double r1;
+for (int i = 0; i < 8; i++)
+{
+    r1 = rangeResistors[i]->value;
+    qDebug() << QString("Range Resistor Value = %1").arg(r1);
+    qDebug() << QString("Voltage Divider Maximum = %1").arg(vDivider(vdd, r1, therm1));
+    qDebug() << QString("Voltage Divider Minimum = %1").arg(vDivider(vdd, r1, therm2));
+}
+*/
+"Range Resistor Value = 0"
+"Voltage Divider Maximum = 2.9"
+"Voltage Divider Minimum = 2.9"
+"Range Resistor Value = 0"
+"Voltage Divider Maximum = 2.9"
+"Voltage Divider Minimum = 2.9"
+
+"Range Resistor Value = 6900"
+"Voltage Divider Maximum = 2.71282"
+"Voltage Divider Minimum = 1.51527"
+"Range Resistor Value = 5800"
+"Voltage Divider Maximum = 2.74102"
+"Voltage Divider Minimum = 1.64012"
+"Range Resistor Value = 5000"
+"Voltage Divider Maximum = 2.7619"
+"Voltage Divider Minimum = 1.74467"
+"Range Resistor Value = 4400"
+"Voltage Divider Maximum = 2.77778"
+"Voltage Divider Minimum = 1.83226"
+"Range Resistor Value = 3200"
+"Voltage Divider Maximum = 2.81008"
+"Voltage Divider Minimum = 2.03679"
+"Range Resistor Value = 2700"
+"Voltage Divider Maximum = 2.82376"
+"Voltage Divider Minimum = 2.13614"

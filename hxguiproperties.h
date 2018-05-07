@@ -1,0 +1,7 @@
+#ifndef HXGUIPROPERTIES_H
+#define HXGUIPROPERTIES_H
+
+#endif // HXGUIPROPERTIES_H
+
+#define _COMM_DEBUG_ENABLED
+//#define _HX_TEST_GUI
