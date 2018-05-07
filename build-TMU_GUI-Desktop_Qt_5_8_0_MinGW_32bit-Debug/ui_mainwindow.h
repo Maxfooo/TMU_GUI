@@ -41,6 +41,7 @@ class Ui_MainWindow
 public:
     QAction *actionSave_UI_State;
     QAction *actionLoad_UI_State;
+    QAction *actionRefresh_Micro;
     QWidget *centralWidget;
     QGroupBox *groupBox_10;
     QTextBrowser *textBrowser;
@@ -263,6 +264,8 @@ public:
         actionSave_UI_State->setObjectName(QStringLiteral("actionSave_UI_State"));
         actionLoad_UI_State = new QAction(MainWindow);
         actionLoad_UI_State->setObjectName(QStringLiteral("actionLoad_UI_State"));
+        actionRefresh_Micro = new QAction(MainWindow);
+        actionRefresh_Micro->setObjectName(QStringLiteral("actionRefresh_Micro"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBox_10 = new QGroupBox(centralWidget);
@@ -1621,6 +1624,7 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(actionRefresh_Micro);
 
         retranslateUi(MainWindow);
 
@@ -1635,6 +1639,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "TM1100 Thermal Management Unit", Q_NULLPTR));
         actionSave_UI_State->setText(QApplication::translate("MainWindow", "Save UI State", Q_NULLPTR));
         actionLoad_UI_State->setText(QApplication::translate("MainWindow", "Load UI State", Q_NULLPTR));
+        actionRefresh_Micro->setText(QApplication::translate("MainWindow", "Refresh Micro", Q_NULLPTR));
         groupBox_10->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
         groupBox_3->setTitle(QString());
         label_2->setText(QApplication::translate("MainWindow", "Gain Resistor", Q_NULLPTR));

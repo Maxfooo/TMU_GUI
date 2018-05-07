@@ -159,6 +159,8 @@ private slots:
 
     void updateDataInfo();
 
+    void on_actionRefresh_Micro_triggered();
+
 public slots:
     void updateDirectGUI();
     void updateDataGUI(USB_READBACK_TYPE);
@@ -204,6 +206,7 @@ private:
     void TMUDetected(bool d);
     void OTPProgrammed(bool o);
     void debugReadback();
+    void refreshMicro();
 
     //TMU object
     TMU* tmu;

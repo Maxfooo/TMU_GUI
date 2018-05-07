@@ -289,13 +289,22 @@ void MainWindow::TMUDetected(bool d)
     if (d)
     {
         ui->label_28->setText("Yes");
-        ui->label_38->setText(QString::number(tmu->getAsicRev(), 16));
+        ui->label_38->setText("0x" + QString::number(tmu->getAsicRev(), 16));
     }
     else
     {
         ui->label_28->setText("No");
         ui->label_38->setText("PN");
     }
+}
+
+void MainWindow::refreshMicro()
+{
+    qDebug() << "Refreshing Micro";
+    uchar flushInputBuff[3] = {HX_PC_FLUSH_INPUT_BUFFER, 1, 0};
+    flushInputBuff[2] = HxUtils::calcChecksum(flushInputBuff, 2);
+    hxUSBComm->writeDirect(flushInputBuff, 3);
+    commState = COMM_IDLE;
 }
 
 void MainWindow::OTPProgrammed(bool o)
@@ -1266,3 +1275,8 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
 }
 
 
+
+void MainWindow::on_actionRefresh_Micro_triggered()
+{
+    refreshMicro();
+}
