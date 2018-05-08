@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\hxusbcomm.o
+./release\hxusbcommworker.o
+./release\utils.o
+./release\tmu.o
+./release\hxutils.o
+./release\savemyui.o
+./release\qrc_tmu_resources.o
+./release\moc_mainwindow.o
+./release\moc_hxusbcomm.o
+./release\moc_hxusbcommworker.o
+);

@@ -126,6 +126,7 @@ void MainWindow::updateDataGUI(USB_READBACK_TYPE readbackType)
         //updateDirectInfo();
         break;
     default:
+        debugReadback();
         break;
     }
 
@@ -210,7 +211,17 @@ void MainWindow::handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx)
     {
         txBuffer[txIndex++] = data[i];
     }
+
+    // CS for correct packet handling in the micro
     txBuffer[txIndex++] = HxUtils::calcChecksum(txBuffer, txIndex);
+
+#ifdef DEBUG
+    qDebug() << "Tx Echo: " << HxUtils::ucharArrayToQString(txBuffer, txIndex);
+    qDebug() << "Data: " << HxUtils::ucharArrayToQString(data, numOfTx);
+    qDebug() << "# of TX: " << QString::number(numOfTx);
+    qDebug() << "# of RX: " << QString::number(numOfRx);
+#endif
+
     hxUSBComm->writeData(cmdByte, txBuffer, txIndex);
 
 }
@@ -229,7 +240,7 @@ void MainWindow::writeRegFromInterface()
     }
     else
     {
-        handleI2CWrite(tmuTxPkt[tmu_index++], SIZE_OF_TX_LATCH_PKT, SIZE_OF_TX_LATCH_PKT);
+        handleI2CWrite(tmuTxPkt[tmu_index++], SIZE_OF_TX_LATCH_PKT, 3);
     }
 }
 
@@ -257,8 +268,15 @@ void MainWindow::fillReadbackPacket()
 
 void MainWindow::detectTMUWrite()
 {
+#ifdef DEBUG
+    uchar rxROM[5] = {CMD_RD_ROM, 0x01, 0x00, 1, 0};
+    rxROM[4] = HxUtils::calcChecksum(rxROM, 4);
+    handleI2CWrite(rxROM, 5, 3);
+    // Works, returns 0x0B for address 0x0001, which is correct
+#else
     commState = COMM_DETECT_DUT_RD;
     handleI2CWrite(tmu->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
+#endif
 }
 
 void MainWindow::detectTMURead()

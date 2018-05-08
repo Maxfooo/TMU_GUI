@@ -124,6 +124,17 @@
 // TX: cmd, Mux location, checksum
 // RX: cmd, dataLo, dataHi, Mux location, checksum
 
+#define CMD_WR_RAM 0x32
+// TX: cmd, addr_lo, addr_hi, num_bytes, DATA, checksum
+// RX: cmd, 0x00, checksum
+#define CMD_RD_RAM 0x22
+// TX: cmd, addr_lo, addr_hi, num_bytes, checksum
+// RX: cmd, DATA, checksum
+
+#define CMD_RD_ROM 0x24
+// TX: cmd, addr_low, addr_hi, num_bytes, checksum
+// RX: cmd, DATA, checksum
+
 
 #define ERR_BUSY 0x11
 #define ERR_OVERFLOW 0x12

@@ -653,27 +653,27 @@ QStringList TMU::getLatchValQStrLst()
     return latchVals;
 }
 
-void TMU::getWriteRegPkt(TmuTxPkt tmuPkt)
+void TMU::getWriteRegPkt(TmuTxPkt& tmuPkt)
 {
     this->generateTxPkt(tmuPkt, CMD_WRITE_LATCH);
 }
 
-void TMU::getReadRegPkt(TmuRxPkt tmuPkt)
+void TMU::getReadRegPkt(TmuRxPkt& tmuPkt)
 {
     this->generateRxPkt(tmuPkt, CMD_READ_LATCH);
 }
 
-void TMU::getWriteOTPPkt(TmuTxPkt tmuPkt)
+void TMU::getWriteOTPPkt(TmuTxPkt& tmuPkt)
 {
     this->generateTxPkt(tmuPkt, CMD_WRITE_OTP);
 }
 
-void TMU::getReadOTPPkt(TmuRxPkt tmuPkt)
+void TMU::getReadOTPPkt(TmuRxPkt& tmuPkt)
 {
     this->generateRxPkt(tmuPkt, CMD_READ_OTP);
 }
 
-void TMU::generateTxPkt(TmuTxPkt tmuPkt, uchar cmd)
+void TMU::generateTxPkt(TmuTxPkt& tmuPkt, uchar cmd)
 {
     for (int i = 0; i < NUM_OF_LATCHES; i++)
     {
@@ -686,7 +686,7 @@ void TMU::generateTxPkt(TmuTxPkt tmuPkt, uchar cmd)
     }
 }
 
-void TMU::generateRxPkt(TmuRxPkt tmuPkt, uchar cmd)
+void TMU::generateRxPkt(TmuRxPkt& tmuPkt, uchar cmd)
 {
     for (int i = 0; i < NUM_OF_LATCHES; i++)
     {

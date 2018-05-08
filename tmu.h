@@ -118,12 +118,12 @@ public:
     QStringList getLatchValQStrLst();
 
     // PACKET BUILDING
-    void getWriteRegPkt(TmuTxPkt tmuPkt);
-    void getReadRegPkt(TmuRxPkt tmuPkt);
-    void getWriteOTPPkt(TmuTxPkt tmuPkt);
-    void getReadOTPPkt(TmuRxPkt tmuPkt);
-    void generateTxPkt(TmuTxPkt tmuPkt, uchar cmd);
-    void generateRxPkt(TmuRxPkt tmuPkt, uchar cmd);
+    void getWriteRegPkt(TmuTxPkt& tmuPkt);
+    void getReadRegPkt(TmuRxPkt& tmuPkt);
+    void getWriteOTPPkt(TmuTxPkt& tmuPkt);
+    void getReadOTPPkt(TmuRxPkt& tmuPkt);
+    void generateTxPkt(TmuTxPkt& tmuPkt, uchar cmd);
+    void generateRxPkt(TmuRxPkt& tmuPkt, uchar cmd);
 
 
 

@@ -8,7 +8,7 @@ QT       += core gui serialport xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Nitrogen_GUI
+TARGET = TMU_GUI
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
