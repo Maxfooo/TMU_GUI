@@ -26,6 +26,7 @@ ACTION ITEMS FOR GUI
 DEMO IDEAS
 -----------------------------------
 + Xtal - Temp co
++ Set constant temp
 + Temp Cycle
 + Gradient Control
 + Heat Patch (medical)
