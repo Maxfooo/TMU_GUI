@@ -1198,11 +1198,6 @@ void MainWindow::initTempCycleTab()
 // SAWTOOTH TEMPERATURE CYCLE PAGE
 //////////////////////////////////////
 
-void MainWindow::on_radioButton_5_clicked() // Enter Sweep Parameters RB
-{
-
-}
-
 void MainWindow::on_lineEdit_3_textEdited(const QString &arg1) // Sweep Param Start Temp Entry
 {
 
