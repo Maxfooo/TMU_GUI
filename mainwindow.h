@@ -55,8 +55,6 @@ private slots:
 
     void on_radioButton_4_clicked();
 
-    void on_radioButton_5_clicked();
-
     void on_lineEdit_3_textEdited(const QString &arg1);
 
     void on_lineEdit_4_textEdited(const QString &arg1);
