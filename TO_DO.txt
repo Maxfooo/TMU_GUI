@@ -22,6 +22,15 @@ ACTION ITEMS FOR GUI
 >> Decimal (0 - 4095)
 >> Hex
 
++ TEMPERATURE CYCLE
+-- Sawtooth
+>> Need a template for a "Temperature Profile" (Object and file structure(XML))
+>> Need a daemon thread to read current temperature
+>> Need a small temp cycle Object to run a thread for updating the registers
+   based on the current temp and it's "Temperature Profile"
+>> Need following mutexs: _currentTempReady
+>> Need following sentinel: _updateBusy
+
 -----------------------------------
 DEMO IDEAS
 -----------------------------------

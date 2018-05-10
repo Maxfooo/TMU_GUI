@@ -7,6 +7,8 @@ INPUT(
 ./release\tmu.o
 ./release\hxutils.o
 ./release\savemyui.o
+./release\tmudaemon.o
+./release\tmutempcycle.o
 ./release\qrc_tmu_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_hxusbcomm.o

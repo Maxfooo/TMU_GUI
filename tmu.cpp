@@ -42,6 +42,10 @@ TMU::TMU()
     initGainResArr();
     initRangeResArr();
     initAdcChannelArr();
+
+    ttCycle = new TMUTempCycle();
+    //ttCycle->debugExport();
+    ttCycle->debugExportImport();
 }
 
 void TMU::initLatches()
@@ -698,5 +702,14 @@ void TMU::generateRxPkt(TmuRxPkt& tmuPkt, uchar cmd)
         }
     }
 }
+
+/**************************************/
+//
+//  TEMPERATURE CYCLE
+//
+/**************************************/
+
+
+
 
 

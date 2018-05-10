@@ -11,6 +11,7 @@
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
 
+extern QString CONFIG_FILE_PREFIX;
 
 typedef enum {
     COMM_IDLE,
@@ -170,7 +171,7 @@ private:
     Ui::MainWindow *ui;
 
     SaveMyUI* saveMyUI;
-    QString CONFIG_FILE_PREFIX = QCoreApplication::applicationDirPath();
+
     QString mySettings = "mySettings.xml";
     QString CONFIG_FILE_NAMES_FILE_NAME = "ConfigFileNames.txt";
 

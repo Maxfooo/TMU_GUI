@@ -7,6 +7,8 @@ INPUT(
 ./debug\tmu.o
 ./debug\hxutils.o
 ./debug\savemyui.o
+./debug\tmudaemon.o
+./debug\tmutempcycle.o
 ./debug\qrc_tmu_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_hxusbcomm.o

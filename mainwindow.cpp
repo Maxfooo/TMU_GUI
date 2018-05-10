@@ -1181,6 +1181,8 @@ void MainWindow::on_pushButton_17_clicked() // Operate from OTP (Adv. Tab)
 //
 /**************************************/
 
+
+
 /**************************************/
 //
 //  TEMPERATURE CYCLE DEMO TAB
@@ -1287,7 +1289,9 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
     ui->textBrowser->setText(info_thermalParameters);
 }
 
-
+//////////////////////////////////////
+// TOOL BAR ACTIONS
+//////////////////////////////////////
 
 void MainWindow::on_actionRefresh_Micro_triggered()
 {

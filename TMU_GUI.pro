@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     utils.cpp \
     tmu.cpp \
     hxutils.cpp \
-    savemyui.cpp
+    savemyui.cpp \
+    tmudaemon.cpp \
+    tmutempcycle.cpp
 
 HEADERS  += mainwindow.h \
     hx_commstd.h \
@@ -42,7 +44,9 @@ HEADERS  += mainwindow.h \
     tmu_gui_properties.h \
     hxutils.h \
     hxguiproperties.h \
-    savemyui.h
+    savemyui.h \
+    tmudaemon.h \
+    tmutempcycle.h
 
 win32:LIBS += "$$PWD/ftd2xx.lib"
 
@@ -57,7 +61,8 @@ DISTFILES += \
     ftd2xx64.dll \
     SaveMyUI_README.txt \
     TestingComm.xml \
-    ConfigFileNames.txt
+    ConfigFileNames.txt \
+    build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/Temperature_Profile_0.xml
 
 RESOURCES += \
     tmu_resources.qrc

@@ -11,6 +11,7 @@
 #include "hx_commstd.h"
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
+#include "tmutempcycle.h"
 
 typedef unsigned char TmuTxPkt[NUM_OF_LATCHES][SIZE_OF_TX_LATCH_PKT];
 typedef unsigned char TmuRxPkt[NUM_OF_LATCHES][SIZE_OF_RX_LATCH_PKT];
@@ -158,10 +159,15 @@ private:
 
     ThermalParams tParams;
 
-
     cbOption* gainResistors[NUM_OF_GAIN_RES];
     cbOption* rangeResistors[NUM_OF_RANGE_RES];
     cbOption* muxChannels[NUM_OF_MUX_CHANNELS];
+
+    // TEMP CYCLE
+    TMUTempCycle* ttCycle;
+
+
+
 
     // init methods
     void initLatches();

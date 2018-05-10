@@ -13,8 +13,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -206,24 +206,48 @@ public:
     QRadioButton *radioButton_8;
     QRadioButton *radioButton_9;
     QWidget *tab_5;
-    QWidget *tab_3;
     QWidget *tab_2;
-    QCheckBox *checkBox;
-    QRadioButton *radioButton_5;
-    QLineEdit *lineEdit_3;
-    QLabel *label_3;
-    QLabel *label_4;
-    QLineEdit *lineEdit_5;
-    QLineEdit *lineEdit_4;
-    QWidget *horizontalLayoutWidget_10;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_40;
-    QPushButton *infoButton_SawtoothSweep;
     QWidget *horizontalLayoutWidget_11;
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_41;
     QPushButton *infoButton_HeaterOptions_2;
     QTableWidget *tableWidget;
+    QGroupBox *groupBox_9;
+    QWidget *gridLayoutWidget_9;
+    QGridLayout *gridLayout_10;
+    QLabel *label_4;
+    QLabel *label_61;
+    QHBoxLayout *horizontalLayout_16;
+    QLineEdit *lineEdit_3;
+    QLabel *label_58;
+    QLabel *label_3;
+    QLineEdit *lineEdit_4;
+    QLabel *label_59;
+    QHBoxLayout *horizontalLayout_18;
+    QLineEdit *lineEdit_5;
+    QComboBox *comboBox_5;
+    QGroupBox *groupBox_12;
+    QPushButton *pushButton_18;
+    QPushButton *pushButton_19;
+    QComboBox *comboBox_6;
+    QLineEdit *lineEdit_26;
+    QPushButton *pushButton_20;
+    QFrame *line;
+    QPushButton *pushButton_21;
+    QWidget *horizontalLayoutWidget_15;
+    QHBoxLayout *horizontalLayout_19;
+    QLabel *label_60;
+    QPushButton *infoButton_SaveProfile;
+    QGroupBox *groupBox_13;
+    QWidget *horizontalLayoutWidget_16;
+    QHBoxLayout *horizontalLayout_21;
+    QRadioButton *radioButton_5;
+    QRadioButton *radioButton_6;
+    QWidget *horizontalLayoutWidget_10;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_40;
+    QPushButton *infoButton_SawtoothSweep;
+    QWidget *tab_3;
     QWidget *tab_6;
     QTableWidget *tableWidget_2;
     QGroupBox *groupBox_6;
@@ -1394,86 +1418,11 @@ public:
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
         tabWidget->addTab(tab_5, QString());
-        tab_3 = new QWidget();
-        tab_3->setObjectName(QStringLiteral("tab_3"));
-        tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        checkBox = new QCheckBox(tab_2);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setEnabled(false);
-        checkBox->setGeometry(QRect(20, 180, 231, 17));
-        radioButton_5 = new QRadioButton(tab_2);
-        radioButton_5->setObjectName(QStringLiteral("radioButton_5"));
-        radioButton_5->setGeometry(QRect(20, 80, 161, 17));
-        lineEdit_3 = new QLineEdit(tab_2);
-        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
-        lineEdit_3->setEnabled(false);
-        lineEdit_3->setGeometry(QRect(20, 110, 101, 20));
-        label_3 = new QLabel(tab_2);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(130, 110, 21, 16));
-        label_4 = new QLabel(tab_2);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(20, 150, 121, 16));
-        lineEdit_5 = new QLineEdit(tab_2);
-        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
-        lineEdit_5->setEnabled(false);
-        lineEdit_5->setGeometry(QRect(150, 150, 101, 20));
-        lineEdit_4 = new QLineEdit(tab_2);
-        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
-        lineEdit_4->setEnabled(false);
-        lineEdit_4->setGeometry(QRect(150, 110, 101, 20));
-        horizontalLayoutWidget_10 = new QWidget(tab_2);
-        horizontalLayoutWidget_10->setObjectName(QStringLiteral("horizontalLayoutWidget_10"));
-        horizontalLayoutWidget_10->setGeometry(QRect(20, 20, 147, 31));
-        horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_10);
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        label_40 = new QLabel(horizontalLayoutWidget_10);
-        label_40->setObjectName(QStringLiteral("label_40"));
-
-        horizontalLayout_10->addWidget(label_40);
-
-        infoButton_SawtoothSweep = new QPushButton(horizontalLayoutWidget_10);
-        infoButton_SawtoothSweep->setObjectName(QStringLiteral("infoButton_SawtoothSweep"));
-        infoButton_SawtoothSweep->setStyleSheet(QLatin1String("QPushButton::!pressed{\n"
-"background-color: white;\n"
-"border-style: solid;\n"
-"border-width:1px;\n"
-"border-radius:7px;\n"
-"border-color: gray;\n"
-"max-width:12px;\n"
-"max-height:12px;\n"
-"min-width:12px;\n"
-"min-height:12px;\n"
-"font-size: 10px;\n"
-"font-family: \"Bookman Old Style\";\n"
-"font-style:italic;\n"
-"}\n"
-"\n"
-"QPushButton::pressed{\n"
-"background-color: rgb(216, 192, 95);\n"
-"border-style: solid;\n"
-"border-width:1px;\n"
-"border-radius:7px;\n"
-"border-color: gray;\n"
-"max-width:12px;\n"
-"max-height:12px;\n"
-"min-width:12px;\n"
-"min-height:12px;\n"
-"font-size: 10px;\n"
-"font-family: \"Bookman Old Style\";\n"
-"font-style:italic;\n"
-"}"));
-
-        horizontalLayout_10->addWidget(infoButton_SawtoothSweep);
-
         horizontalLayoutWidget_11 = new QWidget(tab_2);
         horizontalLayoutWidget_11->setObjectName(QStringLiteral("horizontalLayoutWidget_11"));
-        horizontalLayoutWidget_11->setGeometry(QRect(410, 20, 152, 31));
+        horizontalLayoutWidget_11->setGeometry(QRect(370, 60, 152, 31));
         horizontalLayout_11 = new QHBoxLayout(horizontalLayoutWidget_11);
         horizontalLayout_11->setSpacing(6);
         horizontalLayout_11->setContentsMargins(11, 11, 11, 11);
@@ -1526,8 +1475,237 @@ public:
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(370, 70, 256, 341));
+        tableWidget->setGeometry(QRect(370, 90, 231, 331));
+        groupBox_9 = new QGroupBox(tab_2);
+        groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
+        groupBox_9->setGeometry(QRect(20, 90, 331, 71));
+        gridLayoutWidget_9 = new QWidget(groupBox_9);
+        gridLayoutWidget_9->setObjectName(QStringLiteral("gridLayoutWidget_9"));
+        gridLayoutWidget_9->setGeometry(QRect(10, 10, 311, 52));
+        gridLayout_10 = new QGridLayout(gridLayoutWidget_9);
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setContentsMargins(11, 11, 11, 11);
+        gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
+        gridLayout_10->setContentsMargins(0, 0, 0, 0);
+        label_4 = new QLabel(gridLayoutWidget_9);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        gridLayout_10->addWidget(label_4, 1, 0, 1, 1);
+
+        label_61 = new QLabel(gridLayoutWidget_9);
+        label_61->setObjectName(QStringLiteral("label_61"));
+
+        gridLayout_10->addWidget(label_61, 0, 0, 1, 1);
+
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setSpacing(6);
+        horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
+        lineEdit_3 = new QLineEdit(gridLayoutWidget_9);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+        lineEdit_3->setEnabled(false);
+
+        horizontalLayout_16->addWidget(lineEdit_3);
+
+        label_58 = new QLabel(gridLayoutWidget_9);
+        label_58->setObjectName(QStringLiteral("label_58"));
+
+        horizontalLayout_16->addWidget(label_58);
+
+        label_3 = new QLabel(gridLayoutWidget_9);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        horizontalLayout_16->addWidget(label_3);
+
+        lineEdit_4 = new QLineEdit(gridLayoutWidget_9);
+        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
+        lineEdit_4->setEnabled(false);
+
+        horizontalLayout_16->addWidget(lineEdit_4);
+
+        label_59 = new QLabel(gridLayoutWidget_9);
+        label_59->setObjectName(QStringLiteral("label_59"));
+
+        horizontalLayout_16->addWidget(label_59);
+
+
+        gridLayout_10->addLayout(horizontalLayout_16, 0, 1, 1, 1);
+
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setSpacing(6);
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
+        lineEdit_5 = new QLineEdit(gridLayoutWidget_9);
+        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
+        lineEdit_5->setEnabled(false);
+
+        horizontalLayout_18->addWidget(lineEdit_5);
+
+        comboBox_5 = new QComboBox(gridLayoutWidget_9);
+        comboBox_5->setObjectName(QStringLiteral("comboBox_5"));
+
+        horizontalLayout_18->addWidget(comboBox_5);
+
+
+        gridLayout_10->addLayout(horizontalLayout_18, 1, 1, 1, 1);
+
+        groupBox_12 = new QGroupBox(tab_2);
+        groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
+        groupBox_12->setGeometry(QRect(20, 190, 331, 231));
+        pushButton_18 = new QPushButton(groupBox_12);
+        pushButton_18->setObjectName(QStringLiteral("pushButton_18"));
+        pushButton_18->setGeometry(QRect(10, 40, 141, 23));
+        pushButton_19 = new QPushButton(groupBox_12);
+        pushButton_19->setObjectName(QStringLiteral("pushButton_19"));
+        pushButton_19->setGeometry(QRect(170, 40, 151, 23));
+        comboBox_6 = new QComboBox(groupBox_12);
+        comboBox_6->setObjectName(QStringLiteral("comboBox_6"));
+        comboBox_6->setGeometry(QRect(10, 10, 311, 22));
+        lineEdit_26 = new QLineEdit(groupBox_12);
+        lineEdit_26->setObjectName(QStringLiteral("lineEdit_26"));
+        lineEdit_26->setEnabled(false);
+        lineEdit_26->setGeometry(QRect(10, 80, 311, 20));
+        pushButton_20 = new QPushButton(groupBox_12);
+        pushButton_20->setObjectName(QStringLiteral("pushButton_20"));
+        pushButton_20->setGeometry(QRect(10, 120, 311, 31));
+        QFont font;
+        font.setPointSize(15);
+        font.setBold(true);
+        font.setItalic(false);
+        font.setUnderline(false);
+        font.setWeight(75);
+        pushButton_20->setFont(font);
+        line = new QFrame(groupBox_12);
+        line->setObjectName(QStringLiteral("line"));
+        line->setGeometry(QRect(10, 160, 311, 16));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+        pushButton_21 = new QPushButton(groupBox_12);
+        pushButton_21->setObjectName(QStringLiteral("pushButton_21"));
+        pushButton_21->setGeometry(QRect(10, 180, 311, 31));
+        QFont font1;
+        font1.setPointSize(15);
+        font1.setBold(true);
+        font1.setWeight(75);
+        pushButton_21->setFont(font1);
+        horizontalLayoutWidget_15 = new QWidget(tab_2);
+        horizontalLayoutWidget_15->setObjectName(QStringLiteral("horizontalLayoutWidget_15"));
+        horizontalLayoutWidget_15->setGeometry(QRect(20, 170, 111, 21));
+        horizontalLayout_19 = new QHBoxLayout(horizontalLayoutWidget_15);
+        horizontalLayout_19->setSpacing(6);
+        horizontalLayout_19->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
+        horizontalLayout_19->setContentsMargins(0, 0, 0, 0);
+        label_60 = new QLabel(horizontalLayoutWidget_15);
+        label_60->setObjectName(QStringLiteral("label_60"));
+
+        horizontalLayout_19->addWidget(label_60);
+
+        infoButton_SaveProfile = new QPushButton(horizontalLayoutWidget_15);
+        infoButton_SaveProfile->setObjectName(QStringLiteral("infoButton_SaveProfile"));
+        infoButton_SaveProfile->setStyleSheet(QLatin1String("QPushButton::!pressed{\n"
+"background-color: white;\n"
+"border-style: solid;\n"
+"border-width:1px;\n"
+"border-radius:7px;\n"
+"border-color: gray;\n"
+"max-width:12px;\n"
+"max-height:12px;\n"
+"min-width:12px;\n"
+"min-height:12px;\n"
+"font-size: 10px;\n"
+"font-family: \"Bookman Old Style\";\n"
+"font-style:italic;\n"
+"}\n"
+"\n"
+"QPushButton::pressed{\n"
+"background-color: rgb(216, 192, 95);\n"
+"border-style: solid;\n"
+"border-width:1px;\n"
+"border-radius:7px;\n"
+"border-color: gray;\n"
+"max-width:12px;\n"
+"max-height:12px;\n"
+"min-width:12px;\n"
+"min-height:12px;\n"
+"font-size: 10px;\n"
+"font-family: \"Bookman Old Style\";\n"
+"font-style:italic;\n"
+"}"));
+
+        horizontalLayout_19->addWidget(infoButton_SaveProfile);
+
+        groupBox_13 = new QGroupBox(tab_2);
+        groupBox_13->setObjectName(QStringLiteral("groupBox_13"));
+        groupBox_13->setGeometry(QRect(10, 10, 701, 41));
+        horizontalLayoutWidget_16 = new QWidget(groupBox_13);
+        horizontalLayoutWidget_16->setObjectName(QStringLiteral("horizontalLayoutWidget_16"));
+        horizontalLayoutWidget_16->setGeometry(QRect(10, 10, 681, 21));
+        horizontalLayout_21 = new QHBoxLayout(horizontalLayoutWidget_16);
+        horizontalLayout_21->setSpacing(6);
+        horizontalLayout_21->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
+        horizontalLayout_21->setContentsMargins(0, 0, 0, 0);
+        radioButton_5 = new QRadioButton(horizontalLayoutWidget_16);
+        radioButton_5->setObjectName(QStringLiteral("radioButton_5"));
+        radioButton_5->setChecked(true);
+
+        horizontalLayout_21->addWidget(radioButton_5);
+
+        radioButton_6 = new QRadioButton(horizontalLayoutWidget_16);
+        radioButton_6->setObjectName(QStringLiteral("radioButton_6"));
+
+        horizontalLayout_21->addWidget(radioButton_6);
+
+        horizontalLayoutWidget_10 = new QWidget(tab_2);
+        horizontalLayoutWidget_10->setObjectName(QStringLiteral("horizontalLayoutWidget_10"));
+        horizontalLayoutWidget_10->setGeometry(QRect(20, 60, 172, 31));
+        horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_10);
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
+        label_40 = new QLabel(horizontalLayoutWidget_10);
+        label_40->setObjectName(QStringLiteral("label_40"));
+
+        horizontalLayout_10->addWidget(label_40);
+
+        infoButton_SawtoothSweep = new QPushButton(horizontalLayoutWidget_10);
+        infoButton_SawtoothSweep->setObjectName(QStringLiteral("infoButton_SawtoothSweep"));
+        infoButton_SawtoothSweep->setStyleSheet(QLatin1String("QPushButton::!pressed{\n"
+"background-color: white;\n"
+"border-style: solid;\n"
+"border-width:1px;\n"
+"border-radius:7px;\n"
+"border-color: gray;\n"
+"max-width:12px;\n"
+"max-height:12px;\n"
+"min-width:12px;\n"
+"min-height:12px;\n"
+"font-size: 10px;\n"
+"font-family: \"Bookman Old Style\";\n"
+"font-style:italic;\n"
+"}\n"
+"\n"
+"QPushButton::pressed{\n"
+"background-color: rgb(216, 192, 95);\n"
+"border-style: solid;\n"
+"border-width:1px;\n"
+"border-radius:7px;\n"
+"border-color: gray;\n"
+"max-width:12px;\n"
+"max-height:12px;\n"
+"min-width:12px;\n"
+"min-height:12px;\n"
+"font-size: 10px;\n"
+"font-family: \"Bookman Old Style\";\n"
+"font-style:italic;\n"
+"}"));
+
+        horizontalLayout_10->addWidget(infoButton_SawtoothSweep);
+
         tabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        tabWidget->addTab(tab_3, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QStringLiteral("tab_6"));
         tableWidget_2 = new QTableWidget(tab_6);
@@ -1628,7 +1806,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1735,20 +1913,32 @@ public:
         radioButton_9->setText(QApplication::translate("MainWindow", "Disable", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Advanced", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Constant  Temperature Demo", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Gradient Demo", Q_NULLPTR));
-        checkBox->setText(QApplication::translate("MainWindow", "Sweep Back to Starting Temperature", Q_NULLPTR));
-        radioButton_5->setText(QApplication::translate("MainWindow", "Enter Sweep Parameters", Q_NULLPTR));
-        label_3->setText(QApplication::translate("MainWindow", "To", Q_NULLPTR));
-        label_4->setText(QApplication::translate("MainWindow", "Time to Complete Sweep", Q_NULLPTR));
-        label_40->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#0f4b96;\">Sawtooth Sweep</span></p></body></html>", Q_NULLPTR));
-        infoButton_SawtoothSweep->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
         label_41->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#0f4b96;\">Piecewise Sweep</span></p></body></html>", Q_NULLPTR));
         infoButton_HeaterOptions_2->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Temperature", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Dwell Time", Q_NULLPTR));
+        groupBox_9->setTitle(QString());
+        label_4->setText(QApplication::translate("MainWindow", "Sawtooth Period", Q_NULLPTR));
+        label_61->setText(QApplication::translate("MainWindow", "Temp Range", Q_NULLPTR));
+        label_58->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "To", Q_NULLPTR));
+        label_59->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
+        groupBox_12->setTitle(QString());
+        pushButton_18->setText(QApplication::translate("MainWindow", "Save Profile", Q_NULLPTR));
+        pushButton_19->setText(QApplication::translate("MainWindow", "Revert Profile", Q_NULLPTR));
+        pushButton_20->setText(QApplication::translate("MainWindow", "Run", Q_NULLPTR));
+        pushButton_21->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
+        label_60->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600; font-style:italic;\">Save Profile</span></p></body></html>", Q_NULLPTR));
+        infoButton_SaveProfile->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
+        groupBox_13->setTitle(QString());
+        radioButton_5->setText(QApplication::translate("MainWindow", "Sawtooth", Q_NULLPTR));
+        radioButton_6->setText(QApplication::translate("MainWindow", "Piecewise", Q_NULLPTR));
+        label_40->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#0f4b96;\">Sawtooth Sweep</span></p></body></html>", Q_NULLPTR));
+        infoButton_SawtoothSweep->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Temperature Cycle Demo", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Gradient Demo", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Name", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->horizontalHeaderItem(1);
