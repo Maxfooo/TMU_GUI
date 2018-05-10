@@ -225,7 +225,7 @@ public:
     QLabel *label_59;
     QHBoxLayout *horizontalLayout_18;
     QLineEdit *lineEdit_5;
-    QComboBox *comboBox_5;
+    QLabel *label_62;
     QGroupBox *groupBox_12;
     QPushButton *pushButton_18;
     QPushButton *pushButton_19;
@@ -1539,10 +1539,10 @@ public:
 
         horizontalLayout_18->addWidget(lineEdit_5);
 
-        comboBox_5 = new QComboBox(gridLayoutWidget_9);
-        comboBox_5->setObjectName(QStringLiteral("comboBox_5"));
+        label_62 = new QLabel(gridLayoutWidget_9);
+        label_62->setObjectName(QStringLiteral("label_62"));
 
-        horizontalLayout_18->addWidget(comboBox_5);
+        horizontalLayout_18->addWidget(label_62);
 
 
         gridLayout_10->addLayout(horizontalLayout_18, 1, 1, 1, 1);
@@ -1925,6 +1925,7 @@ public:
         label_58->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "To", Q_NULLPTR));
         label_59->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
+        label_62->setText(QApplication::translate("MainWindow", "Seconds", Q_NULLPTR));
         groupBox_12->setTitle(QString());
         pushButton_18->setText(QApplication::translate("MainWindow", "Save Profile", Q_NULLPTR));
         pushButton_19->setText(QApplication::translate("MainWindow", "Revert Profile", Q_NULLPTR));

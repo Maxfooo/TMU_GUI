@@ -9,8 +9,10 @@ INPUT(
 ./release\savemyui.o
 ./release\tmudaemon.o
 ./release\tmutempcycle.o
+./release\processrunningle.o
 ./release\qrc_tmu_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_hxusbcomm.o
 ./release\moc_hxusbcommworker.o
+./release\moc_processrunningle.o
 );

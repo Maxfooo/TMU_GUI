@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     hxutils.cpp \
     savemyui.cpp \
     tmudaemon.cpp \
-    tmutempcycle.cpp
+    tmutempcycle.cpp \
+    processrunningle.cpp
 
 HEADERS  += mainwindow.h \
     hx_commstd.h \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
     hxguiproperties.h \
     savemyui.h \
     tmudaemon.h \
-    tmutempcycle.h
+    tmutempcycle.h \
+    processrunningle.h
 
 win32:LIBS += "$$PWD/ftd2xx.lib"
 

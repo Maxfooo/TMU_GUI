@@ -43,7 +43,12 @@ MainWindow::MainWindow(QWidget *parent) :
     initTempCycleTab();
     initAdvancedTab();
 
+    /****** INIT MISC ******/
+    procRunLE = new ProcessRunningLE(ui->lineEdit_26, procRunPeriod);
+
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -1296,4 +1301,44 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
 void MainWindow::on_actionRefresh_Micro_triggered()
 {
     refreshMicro();
+}
+
+void MainWindow::on_lineEdit_3_editingFinished() // temp range start LE
+{
+
+}
+
+void MainWindow::on_lineEdit_4_editingFinished() // temp range stop LE
+{
+
+}
+
+void MainWindow::on_lineEdit_5_editingFinished() // sawtooth period LE
+{
+
+}
+
+void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile DropBox
+{
+
+}
+
+void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
+{
+
+}
+
+void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
+{
+
+}
+
+void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
+{
+    procRunLE->startProcRun();
+}
+
+void MainWindow::on_pushButton_21_clicked() // STOP temp profile PB
+{
+    procRunLE->stopProcRun();
 }

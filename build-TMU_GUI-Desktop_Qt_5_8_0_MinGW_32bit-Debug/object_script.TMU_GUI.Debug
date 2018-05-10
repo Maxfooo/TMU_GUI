@@ -9,8 +9,10 @@ INPUT(
 ./debug\savemyui.o
 ./debug\tmudaemon.o
 ./debug\tmutempcycle.o
+./debug\processrunningle.o
 ./debug\qrc_tmu_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_hxusbcomm.o
 ./debug\moc_hxusbcommworker.o
+./debug\moc_processrunningle.o
 );

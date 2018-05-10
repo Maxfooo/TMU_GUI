@@ -8,6 +8,7 @@
 #include "hxusbcomm.h"
 #include "hx_commstd.h"
 #include "savemyui.h"
+#include "processrunningle.h"
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
 
@@ -160,6 +161,22 @@ private slots:
 
     void on_actionRefresh_Micro_triggered();
 
+    void on_lineEdit_3_editingFinished();
+
+    void on_lineEdit_4_editingFinished();
+
+    void on_lineEdit_5_editingFinished();
+
+    void on_comboBox_6_currentIndexChanged(int index);
+
+    void on_pushButton_18_clicked();
+
+    void on_pushButton_19_clicked();
+
+    void on_pushButton_20_clicked();
+
+    void on_pushButton_21_clicked();
+
 public slots:
     void updateDirectGUI();
     void updateDataGUI(USB_READBACK_TYPE);
@@ -181,6 +198,10 @@ private:
     QRegExpValidator* hexByteValidator;
     QRegExpValidator* decValidator;
     QRegExpValidator* floatValidator;
+
+    ProcessRunningLE* procRunLE;
+    QString procRunLEName;
+    double procRunPeriod = 300;
 
 
     //USB Comm Objects and Variables

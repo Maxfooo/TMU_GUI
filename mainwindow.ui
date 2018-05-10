@@ -1720,7 +1720,11 @@ font-style:italic;
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_5"/>
+           <widget class="QLabel" name="label_62">
+            <property name="text">
+             <string>Seconds</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
