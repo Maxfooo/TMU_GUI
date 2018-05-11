@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /****** INIT MISC ******/
     procRunLE = new ProcessRunningLE(ui->lineEdit_26, procRunPeriod);
+    tmuDaemon = new TMUDaemon(&tmu);
 
 }
 
@@ -1198,31 +1199,78 @@ void MainWindow::initTempCycleTab()
 {
     // init piecewise table
     ui->tableWidget->setRowCount(PIECEWISE_STEP_COUNT);
+    this->on_radioButton_5_clicked();
+}
 
+
+void MainWindow::on_radioButton_5_clicked()
+{
+    ui->groupBox_9->setEnabled(true);
+    ui->tableWidget->setEnabled(false);
+}
+
+void MainWindow::on_radioButton_6_clicked()
+{
+    ui->groupBox_9->setEnabled(false);
+    ui->tableWidget->setEnabled(true);
 }
 
 //////////////////////////////////////
 // SAWTOOTH TEMPERATURE CYCLE PAGE
 //////////////////////////////////////
 
-void MainWindow::on_lineEdit_3_textEdited(const QString &arg1) // Sweep Param Start Temp Entry
+
+void MainWindow::on_lineEdit_3_editingFinished() // temp range start LE
 {
 
 }
 
-void MainWindow::on_lineEdit_4_textEdited(const QString &arg1) // Sweep Param Stop Temp Entry
+void MainWindow::on_lineEdit_4_editingFinished() // temp range stop LE
 {
 
 }
 
-void MainWindow::on_lineEdit_5_textEdited(const QString &arg1) // Sweep Param Time Entry
+void MainWindow::on_lineEdit_5_editingFinished() // sawtooth period LE
 {
 
 }
 
-void MainWindow::on_checkBox_clicked(bool checked) // Sweep Param Sweep Back CB
+void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile DropBox
 {
 
+}
+
+void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
+{
+
+}
+
+void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
+{
+
+}
+
+void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
+{
+    // Setup tmutempcycle
+    if (ui->radioButton_5->isChecked())
+    {
+        // Sawtooth
+
+    }
+    else
+    {
+        // Piecewise
+
+    }
+    procRunLE->startProcRun();
+    tmuDaemon->start();
+}
+
+void MainWindow::on_pushButton_21_clicked() // STOP temp profile PB
+{
+    procRunLE->stopProcRun();
+    tmuDaemon->stop();
 }
 
 //////////////////////////////////////
@@ -1303,42 +1351,5 @@ void MainWindow::on_actionRefresh_Micro_triggered()
     refreshMicro();
 }
 
-void MainWindow::on_lineEdit_3_editingFinished() // temp range start LE
-{
 
-}
 
-void MainWindow::on_lineEdit_4_editingFinished() // temp range stop LE
-{
-
-}
-
-void MainWindow::on_lineEdit_5_editingFinished() // sawtooth period LE
-{
-
-}
-
-void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile DropBox
-{
-
-}
-
-void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
-{
-
-}
-
-void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
-{
-
-}
-
-void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
-{
-    procRunLE->startProcRun();
-}
-
-void MainWindow::on_pushButton_21_clicked() // STOP temp profile PB
-{
-    procRunLE->stopProcRun();
-}

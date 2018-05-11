@@ -5,6 +5,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
+#include <QMutex>
 #include <math.h>
 #include "utils.h"
 #include "hxusbcomm.h"
@@ -57,6 +58,7 @@ public:
     latch* latches[NUM_OF_LATCHES];
     latch adc_mux_latch;
     latch asic_rev_sfr;
+    QMutex mutex;
 
     // Analog 0 latch
     bool setEHTransistor(bool nmosOrNpn);

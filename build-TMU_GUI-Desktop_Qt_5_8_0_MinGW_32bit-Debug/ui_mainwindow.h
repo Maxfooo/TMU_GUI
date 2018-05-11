@@ -1561,8 +1561,9 @@ public:
         comboBox_6->setGeometry(QRect(10, 10, 311, 22));
         lineEdit_26 = new QLineEdit(groupBox_12);
         lineEdit_26->setObjectName(QStringLiteral("lineEdit_26"));
-        lineEdit_26->setEnabled(false);
+        lineEdit_26->setEnabled(true);
         lineEdit_26->setGeometry(QRect(10, 80, 311, 20));
+        lineEdit_26->setReadOnly(true);
         pushButton_20 = new QPushButton(groupBox_12);
         pushButton_20->setObjectName(QStringLiteral("pushButton_20"));
         pushButton_20->setGeometry(QRect(10, 120, 311, 31));

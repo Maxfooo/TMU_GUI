@@ -9,7 +9,7 @@ ProcessRunningLE::ProcessRunningLE(QLineEdit* procRunLE)
 ProcessRunningLE::ProcessRunningLE(QLineEdit* procRunLE, double period)
 {
     this->procRunLE = procRunLE;
-    this->period = period;
+    this->period = period*500;
     initProcRunLE();
 }
 
@@ -24,8 +24,8 @@ ProcessRunningLE::~ProcessRunningLE()
 void ProcessRunningLE::initProcRunLE()
 {
     //leLength = procRunLE->maxLength();
-    leLength = std::floor(procRunLE->width()/5);
-    sliderLength = std::round(0.25*leLength);
+    leLength = std::floor(procRunLE->width()/3);
+    sliderLength = std::floor(0.25*leLength);
     timeStep = period/sliderLength;
     procRunTimer = new QTimer;
     procRunTimer->setInterval(timeStep);
@@ -51,7 +51,7 @@ void ProcessRunningLE::initProcRunText()
 
 void ProcessRunningLE::setPeriod(double period)
 {
-    this->period = 1000*period;
+    this->period = 500*period;
     timeStep = this->period/leLength;
 }
 
@@ -70,8 +70,10 @@ void ProcessRunningLE::stopProcRun()
 
 void ProcessRunningLE::updateRunProcLE()
 {
+    procRunTimer->stop();
     procRunText = rotVect<QString>(true, procRunText, 1);
     procRunLE->setText(getLEText());
+    procRunTimer->start();
 }
 
 QString ProcessRunningLE::getLEText()

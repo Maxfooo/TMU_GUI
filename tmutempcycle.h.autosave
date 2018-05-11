@@ -48,6 +48,7 @@ public slots:
 private:
     TMU* tmu;
     uchar id;
+    QTimer* checkTimer;
     TTData tempProfile[PIECEWISE_STEP_COUNT];
     QString profileFileName = GENERIC_PROFILE_FILE_NAME;
     QString errStr = "";

@@ -161,6 +161,8 @@ private slots:
 
     void on_lineEdit_5_editingFinished();
 
+    void on_comboBox_6_currentIndexChanged(int index);
+
     void on_pushButton_18_clicked();
 
     void on_pushButton_19_clicked();
@@ -170,9 +172,9 @@ private slots:
     void on_pushButton_21_clicked();
 
     void on_radioButton_5_clicked();
-
+    
     void on_radioButton_6_clicked();
-
+    
 public slots:
     void updateDirectGUI();
     void updateDataGUI(USB_READBACK_TYPE);

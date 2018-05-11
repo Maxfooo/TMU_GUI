@@ -1,36 +1,69 @@
 #include "tmutempcycle.h"
 
-TMUTempCycle::TMUTempCycle()
+TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, QString fname)
 {
-
+    this->tmu = tmu;
+    this->id = id;
+    profileFileName = fname;
+    checkTimer = new QTimer;
+    checkTimer->setInterval(TEMP_CYCLE_CHECK_PERIOD);
+    connect(checkTimer, SIGNAL(timeout()), this, SLOT(updateHeatLatch());
 }
 
 TMUTempCycle::~TMUTempCycle()
 {
+    if (checkTimer->isActive())
+    {
+        checkTimer->stop();
+    }
+}
+
+void TMUTempCycle::start()
+{
+    checkTimer->start();
+}
+
+void TMUTempCycle::stop()
+{
+    checkTimer->stop();
+}
+
+void TMUTempCycle::updateHeatLatch()
+{
+    // Just check the tmu HEAT latch VARIABLE
+    // If it meets the next temperature step
+    // then, if necessary, update the HEAT latch
+    // on the TMU chip.
+
+    this->stop();
+
+
+    this->start();
+}
+
+bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
+{
+    // Build a piecewise set with evenly spaced temperatures to occupy the period
+    // half up, half down
 
 }
 
-bool TMUTempCycle::setSawtooth(QString fname, double tStart, double tStop, double period)
+void TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(QString fname, double* temp, int tempSize, double* time, int timeSize)
+void TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(QString fname, TTData* ttdata, int ttdataSize)
+void TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(QString fname, const std::vector<double>& temp, const std::vector<double>& time)
-{
-
-}
-
-void TMUTempCycle::setPiecewise(QString fname, const std::vector<TTData>& ttdata)
+void TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
 {
 
 }
