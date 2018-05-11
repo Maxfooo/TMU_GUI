@@ -13,10 +13,11 @@
 #include "tmutempcycle.h"
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
+#define NUM_OF_TEMP_CYCLE_TMUS 9
 
 extern QString CONFIG_FILE_PREFIX;
 
-typedef enum {
+typedef enum CommState {
     COMM_IDLE,
 
     COMM_DETECT_DUT_RD,
@@ -32,7 +33,29 @@ typedef enum {
     COMM_RX_OTP_TO_FILE,
 
     COMM_RX_MUX
-}CommState;
+};
+
+enum {
+    TMU_LOW_LEFT,
+    TMU_LOW_MID,
+    TMU_LOW_RIGHT,
+    TMU_MID_LEFT,
+    TMU_MID_MID,
+    TMU_MID_RIGHT,
+    TMU_UP_LEFT,
+    TMU_UP_MID,
+    TMU_UP_RIGHT
+};
+
+const uchar PRIMARY_TMU_ID = TMU_MID_MID;
+
+typedef enum TempCycleState{
+    TEMP_CYCLE_STOP,
+    TEMP_CYCLE_START,
+    TEMP_CYCLE_PAUSE,
+    TEMP_CYCLE_RESUME
+};
+
 
 namespace Ui {
 class MainWindow;
@@ -161,6 +184,8 @@ private slots:
 
     void on_lineEdit_5_editingFinished();
 
+    void on_comboBox_6_currentIndexChanged(int index);
+
     void on_pushButton_18_clicked();
 
     void on_pushButton_19_clicked();
@@ -170,8 +195,12 @@ private slots:
     void on_pushButton_21_clicked();
 
     void on_radioButton_5_clicked();
-
+    
     void on_radioButton_6_clicked();
+
+    void on_pushButton_22_clicked();
+
+    void on_pushButton_23_clicked();
 
 public slots:
     void updateDirectGUI();
@@ -187,6 +216,7 @@ private:
 
     QString mySettings = "mySettings.xml";
     QString CONFIG_FILE_NAMES_FILE_NAME = "ConfigFileNames.txt";
+    QString TEMP_CYCLE_PROFILE_FILE_NAME = "TempCycleProfiles.txt";
 
     QRegExpValidator *hexFileValidator;
     QRegExpValidator* hexValidator;
@@ -227,9 +257,12 @@ private:
     //TMU object
     TMU* tmu;
     TMUDaemon* tmuDaemon;
+    TMUTempCycle* tmuTempCycle[NUM_OF_TEMP_CYCLE_TMUS];
+    TempCycleState tempCycleState = TEMP_CYCLE_STOP;
 
     void initGeneralConfigTab();
     void initTempCycleTab();
+    void initTempCycleTMUs();
     void initAdvancedTab();
     void updateAdvancedTab();
     void post(QString s);

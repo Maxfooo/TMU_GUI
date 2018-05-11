@@ -43,9 +43,6 @@ TMU::TMU()
     initRangeResArr();
     initAdcChannelArr();
 
-    ttCycle = new TMUTempCycle();
-    //ttCycle->debugExport();
-    ttCycle->debugExportImport();
 }
 
 void TMU::initLatches()

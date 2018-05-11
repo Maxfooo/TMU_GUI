@@ -1,13 +1,13 @@
 #include "tmutempcycle.h"
 
-TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, QString fname)
+TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu)
 {
     this->tmu = tmu;
     this->id = id;
-    profileFileName = fname;
     checkTimer = new QTimer;
     checkTimer->setInterval(TEMP_CYCLE_CHECK_PERIOD);
-    connect(checkTimer, SIGNAL(timeout()), this, SLOT(updateHeatLatch());
+    checkTimer->setTimerType(Qt::CoarseTimer);
+    connect(checkTimer, SIGNAL(timeout()), this, SLOT(updateHeatLatch()));
 }
 
 TMUTempCycle::~TMUTempCycle()
@@ -23,9 +23,20 @@ void TMUTempCycle::start()
     checkTimer->start();
 }
 
+void TMUTempCycle::pause()
+{
+    checkTimer->stop();
+}
+
+void TMUTempCycle::resume()
+{
+    this->start();
+}
+
 void TMUTempCycle::stop()
 {
     checkTimer->stop();
+    // Other stuff
 }
 
 void TMUTempCycle::updateHeatLatch()
@@ -48,22 +59,22 @@ bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
 
 }
 
-void TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
+bool TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
+bool TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
+bool TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
 {
 
 }
 
-void TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
+bool TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
 {
 
 }

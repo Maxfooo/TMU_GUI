@@ -5,7 +5,8 @@ TMUDaemon::TMUDaemon(TMU *tmu)
     this->tmu = tmu;
     checkTimer = new QTimer;
     checkTimer->setInterval(DAEMON_CHECK_PERIOD);
-    connect(checkTimer, SIGNAL(timeout()), this, SLOT(checkTemperature());
+    checkTimer->setTimerType(Qt::CoarseTimer);
+    //connect(checkTimer, SIGNAL(timeout()), this, SLOT(checkTemperature()));
 }
 
 TMUDaemon::~TMUDaemon()
@@ -15,6 +16,11 @@ TMUDaemon::~TMUDaemon()
         checkTimer->stop();
     }
 }
+
+//void TMUDaemon::initDaemon()
+//{
+
+//}
 
 void TMUDaemon::start()
 {

@@ -19,6 +19,8 @@ public:
     ~ProcessRunningLE();
     void setPeriod(double period);
     void startProcRun();
+    void pauseProcRun();
+    void resumeProcRun();
     void stopProcRun();
 
 public slots:

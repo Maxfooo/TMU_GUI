@@ -29,6 +29,7 @@ void ProcessRunningLE::initProcRunLE()
     timeStep = period/sliderLength;
     procRunTimer = new QTimer;
     procRunTimer->setInterval(timeStep);
+    procRunTimer->setTimerType(Qt::CoarseTimer);
     initProcRunText();
 
     connect(procRunTimer, SIGNAL(timeout()), this, SLOT(updateRunProcLE()));
@@ -59,6 +60,16 @@ void ProcessRunningLE::startProcRun()
 {
     initProcRunText();
     procRunLE->setText(getLEText());
+    procRunTimer->start();
+}
+
+void ProcessRunningLE::pauseProcRun()
+{
+    procRunTimer->stop();
+}
+
+void ProcessRunningLE::resumeProcRun()
+{
     procRunTimer->start();
 }
 

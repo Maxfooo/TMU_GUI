@@ -14,5 +14,6 @@ INPUT(
 ./release\moc_mainwindow.o
 ./release\moc_hxusbcomm.o
 ./release\moc_hxusbcommworker.o
+./release\moc_tmutempcycle.o
 ./release\moc_processrunningle.o
 );

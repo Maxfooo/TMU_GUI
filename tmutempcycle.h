@@ -6,6 +6,7 @@
 #include <QtXml>
 #include <QString>
 #include <QTimer>
+#include <QObject>
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
 #include "tmu.h"
@@ -21,10 +22,11 @@ struct TTData {
     unsigned int time;
 };
 
-class TMUTempCycle
+class TMUTempCycle : public QObject
 {
+    Q_OBJECT
 public:
-    TMUTempCycle(uchar id, TMU *tmu, QString fname);
+    TMUTempCycle(uchar id, TMU *tmu);
     ~TMUTempCycle();
 
     QString getErrorStr() { return errStr;}
@@ -35,11 +37,14 @@ public:
     void debugExportImport();
 
     bool setSawtooth(double tStart, double tStop, double period);
-    void setPiecewise(double* temp, int tempSize, double* time, int timeSize);
-    void setPiecewise(TTData* ttdata, int ttdataSize);
-    void setPiecewise(const std::vector<double>& temp, const std::vector<double>& time);
-    void setPiecewise(const std::vector<TTData>& ttdata);
+    bool setPiecewise(double* temp, int tempSize, double* time, int timeSize);
+    bool setPiecewise(TTData* ttdata, int ttdataSize);
+    bool setPiecewise(const std::vector<double>& temp, const std::vector<double>& time);
+    bool setPiecewise(const std::vector<TTData>& ttdata);
+    bool isReady() { return tmuTempCycleReady;}
     void start();
+    void pause();
+    void resume();
     void stop();
 
 public slots:
@@ -48,9 +53,11 @@ public slots:
 private:
     TMU* tmu;
     uchar id;
+    QTimer* checkTimer;
     TTData tempProfile[PIECEWISE_STEP_COUNT];
     QString profileFileName = GENERIC_PROFILE_FILE_NAME;
     QString errStr = "";
+    bool tmuTempCycleReady = false;
 
     const QString XML_ROOT = "Temperature_Profile";
     const QString XML_TEMP = "Temperature";

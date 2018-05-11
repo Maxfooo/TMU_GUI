@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /****** Setup tmu object ******/
     tmu = new TMU();
+    tmuDaemon = new TMUDaemon(tmu);
+    initTempCycleTMUs();
 
     /****** Setup USB Communication ******/
     hxUSBComm = new HxUSBComm;
@@ -29,13 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
     floatValidator = new QRegExpValidator(QRegExp("^[0-9\\.]+$"),this); //only allow dec/float Values into validator
 
     #ifdef DEBUG
-        CONFIG_FILE_PREFIX.replace("build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/debug", "");
         qDebug() << "Application File Path: " << CONFIG_FILE_PREFIX;
     #endif
 
     /****** INIT FILE NAMES ******/
     mySettings.prepend(CONFIG_FILE_PREFIX);
     CONFIG_FILE_NAMES_FILE_NAME.prepend(CONFIG_FILE_PREFIX);
+    TEMP_CYCLE_PROFILE_FILE_NAME.prepend(CONFIG_FILE_PREFIX);
     saveMyUI = new SaveMyUI(this, mySettings);
 
     /****** INIT COMBO BOXES ******/
@@ -45,11 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /****** INIT MISC ******/
     procRunLE = new ProcessRunningLE(ui->lineEdit_26, procRunPeriod);
-    tmuDaemon = new TMUDaemon(&tmu);
+
 
 }
-
-
 
 MainWindow::~MainWindow()
 {
@@ -61,6 +61,14 @@ MainWindow::~MainWindow()
 void MainWindow::post(QString s)
 {
     ui->textBrowser_2->append(s);
+}
+
+void MainWindow::initTempCycleTMUs()
+{
+    for (uchar i = 0; i < NUM_OF_TEMP_CYCLE_TMUS; i++)
+    {
+        tmuTempCycle[i] = new TMUTempCycle(i, tmu);
+    }
 }
 
 void MainWindow::on_pushButton_3_clicked() // Program OTP
@@ -1200,6 +1208,10 @@ void MainWindow::initTempCycleTab()
     // init piecewise table
     ui->tableWidget->setRowCount(PIECEWISE_STEP_COUNT);
     this->on_radioButton_5_clicked();
+
+    ui->lineEdit_3->setValidator(floatValidator);
+    ui->lineEdit_4->setValidator(floatValidator);
+    ui->lineEdit_5->setValidator(floatValidator);
 }
 
 
@@ -1222,27 +1234,172 @@ void MainWindow::on_radioButton_6_clicked()
 
 void MainWindow::on_lineEdit_3_editingFinished() // temp range start LE
 {
-
+    bool status = false;
+    double tStart = ui->lineEdit_3->text().toDouble(&status);
+    if (!status) // error
+    {
+        post("The Start Temperature value could not be interpreted.");
+        post(QString("Setting the value to the minimum value of %1.").arg(TEMP_CELSIUS_MIN));
+        tStart = TEMP_CELSIUS_MIN;
+    }
+    else if (tStart < TEMP_CELSIUS_MIN)
+    {
+        post("The Start Temperature value must be greater than or equal to the minimum.");
+        post(QString("Setting the value to the minimum value of %1.").arg(TEMP_CELSIUS_MIN));
+        tStart = TEMP_CELSIUS_MIN;
+    }
+    else if (tStart > TEMP_CELSIUS_MAX)
+    {
+        post("The Start Temperature value must be less than or equal to the maximum.");
+        post(QString("Setting the value to the maximum value of %1.").arg(TEMP_CELSIUS_MAX));
+        tStart = TEMP_CELSIUS_MAX;
+    }
+    ui->lineEdit_3->setText(QString::number(tStart));
 }
 
 void MainWindow::on_lineEdit_4_editingFinished() // temp range stop LE
 {
-
+    bool status = false;
+    double tStop = ui->lineEdit_4->text().toDouble(&status);
+    if (!status) // error
+    {
+        post("The Stop Temperature value could not be interpreted.");
+        post(QString("Setting the value to the maximum value of %1.").arg(TEMP_CELSIUS_MAX));
+        tStop = TEMP_CELSIUS_MAX;
+    }
+    else if (tStop < TEMP_CELSIUS_MIN)
+    {
+        post("The Stop Temperature value must be greater than or equal to the minimum.");
+        post(QString("Setting the value to the minimum value of %1.").arg(TEMP_CELSIUS_MIN));
+        tStop = TEMP_CELSIUS_MIN;
+    }
+    else if (tStop > TEMP_CELSIUS_MAX)
+    {
+        post("The Start Temperature value must be less than or equal to the maximum.");
+        post(QString("Setting the value to the maximum value of %1.").arg(TEMP_CELSIUS_MAX));
+        tStop = TEMP_CELSIUS_MAX;
+    }
+    ui->lineEdit_4->setText(QString::number(tStop));
 }
 
 void MainWindow::on_lineEdit_5_editingFinished() // sawtooth period LE
 {
+    bool status = false;
+    unsigned int period = ui->lineEdit_5->text().toUInt(&status);
+    if (!status) // error
+    {
+        post("The Period value could not be interpreted.");
+        post(QString("Setting the value to the minimum value of %1.").arg(SAWTOOTH_PER_MIN));
+        period = SAWTOOTH_PER_MIN;
+    }
+    else if (period < SAWTOOTH_PER_MIN)
+    {
+        post("The Start Temperature value must be greater than or equal to the minimum.");
+        post(QString("Setting the value to the minimum value of %1.").arg(SAWTOOTH_PER_MIN));
+        period = SAWTOOTH_PER_MIN;
+    }
+    ui->lineEdit_5->setText(QString::number(period));
+}
+
+void MainWindow::loadTempCycleCB()
+{
+    QString fileName = TEMP_CYCLE_PROFILE_FILE_NAME;
+    QFile file(fileName);
+    QString temp = "";
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        #ifdef DEBUG
+            qDebug() << "Unable to open temp cycle profile file";
+        #endif
+        return;
+    }
+    QTextStream in(&file);
+    temp = in.readAll();
+    ui->comboBox_6->clear();
+    if (!temp.isEmpty())
+    {
+        QStringList tempCycleProfileNames = temp.split(CONFIG_FILE_NAMES_DELIMETER);
+        ui->comboBox_6->addItems(tempCycleProfileNames);
+    }
+    file.close();
+}
+
+void MainWindow::loadTempCycleTab(TMUTempCycle* ttc)
+{
+    // ttc should be set up with the correct file in it's attributes
+
+}
+
+QString MainWindow::saveTempCycleProfileFileName(QString fname)
+{
+    fname = fname.contains(".xml") ? fname : fname + ".xml";
+
+    QString fileName = CONFIG_FILE_NAMES_FILE_NAME;
+    QFile file(fileName);
+    QString temp = "";
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        #ifdef DEBUG
+            qDebug() << "Unable to open config-file file";
+        #endif
+        return;
+    }
+    QTextStream in(&file);
+
+    // Read everything, clean unwanted new lines
+    temp = in.readAll();
+    temp.replace("\n", "");
+    // update new string to write to file
+    temp += fname + CONFIG_FILE_NAMES_DELIMETER;
+    // remove previous contents of file
+    file.resize(0);
+    // write new string
+    in << temp;
+    file.close();
+
+    loadTempCycleCB();
+
+    return fname.prepend(CONFIG_FILE_PREFIX);
 
 }
 
 void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile DropBox
 {
+    QString saveKey = ui->comboBox_6->itemText(ui->comboBox_6->currentIndex()).append(".xml").prepend(CONFIG_FILE_PREFIX);
 
+    tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+    loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
 }
 
 void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
 {
+    bool ok;
+    QString saveKey = QInputDialog::getText(this, tr("Save Temp Profile"), tr("Enter Save Name:"), QLineEdit::Normal, "temp_profile_0", &ok);
+    if(ok && !saveKey.isEmpty())
+    {
+        if(saveKey.size() < 41)
+        {
+            saveKey = saveTempCycleProfileFileName(saveKey);
+            tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+        }
+        else
+        {
+            post("Save name must be 40 or less characters long");
+            return;
+        }
+    }
 
+    // Setup and tmutempcycle
+    if (ui->radioButton_5->isChecked())
+    {
+        // Sawtooth
+        tmuTempCycle[PRIMARY_TMU_ID]->setSawtooth(tStart, tStop, period);
+    }
+    else
+    {
+        // Piecewise
+
+    }
 }
 
 void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
@@ -1250,27 +1407,64 @@ void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
 
 }
 
+void MainWindow::on_pushButton_22_clicked() // Overwrite Profile PB
+{
+
+}
+
+void MainWindow::on_pushButton_23_clicked() // Remove Profile PB
+{
+
+}
+
 void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
 {
-    // Setup tmutempcycle
-    if (ui->radioButton_5->isChecked())
+    if (!tmuTempCycle[PRIMARY_TMU_ID]->isReady())
     {
-        // Sawtooth
-
+        post("Temperature Cycle is not setup properly or ready to go.");
+        return;
     }
-    else
+
+    bool status = false;
+    double tStart = ui->lineEdit_3->text().toDouble(&status);
+    double tStop = ui->lineEdit_4->text().toDouble(&status);
+    unsigned int period = ui->lineEdit_5->text().toUInt(&status);
+
+    if (tempCycleState == TEMP_CYCLE_STOP)
     {
-        // Piecewise
+        // might need to check to make sure the TMUTempCycle is ready to go
+        // could be function call
+        // could check that a file exists...
 
+        tempCycleState = TEMP_CYCLE_START;
+        ui->pushButton_20->setText("Pause");
+        procRunLE->startProcRun();
+        tmuDaemon->start();
+        tmuTempCycle[PRIMARY_TMU_ID]->start();
     }
-    procRunLE->startProcRun();
-    tmuDaemon->start();
+    else if (tempCycleState == TEMP_CYCLE_START || tempCycleState == TEMP_CYCLE_RESUME)
+    {
+        tempCycleState = TEMP_CYCLE_PAUSE;
+        ui->pushButton_20->setText("Resume");
+        tmuTempCycle[PRIMARY_TMU_ID]->pause();
+        procRunLE->pauseProcRun();
+    }
+    else if (tempCycleState == TEMP_CYCLE_PAUSE)
+    {
+        tempCycleState = TEMP_CYCLE_RESUME;
+        ui->pushButton_20->setText("Pause");
+        tmuTempCycle[PRIMARY_TMU_ID]->resume();
+        procRunLE->resumeProcRun();
+    }
 }
 
 void MainWindow::on_pushButton_21_clicked() // STOP temp profile PB
 {
+    tempCycleState = TEMP_CYCLE_STOP;
+    ui->pushButton_20->setText("Start");
     procRunLE->stopProcRun();
     tmuDaemon->stop();
+    tmuTempCycle[PRIMARY_TMU_ID]->stop();
 }
 
 //////////////////////////////////////
@@ -1350,6 +1544,4 @@ void MainWindow::on_actionRefresh_Micro_triggered()
 {
     refreshMicro();
 }
-
-
 
