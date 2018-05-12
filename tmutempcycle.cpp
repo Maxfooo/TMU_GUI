@@ -56,27 +56,103 @@ bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
 {
     // Build a piecewise set with evenly spaced temperatures to occupy the period
     // half up, half down
+    cycleType = SET_SAWTOOTH;
+    this->period = period;
+    unsigned int timeStep = std::round(period / PIECEWISE_STEP_COUNT);
+    double tempStep = (tStop - tStart) / (PIECEWISE_STEP_COUNT / 2);
+    double temperature = tStart;
+    int j = 0;
+    for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
+    {
+        if (i < PIECEWISE_STEP_COUNT/2)
+        {
+            temperature = tStart + i*tempStep;
+        }
+        else
+        {
+            temperature = tStop - j*tempStep;
+            j++;
+        }
+        tempProfile[i].temp = std::min(temperature, static_cast<double>(TEMP_CELSIUS_MAX));
+        tempProfile[i].time = timeStep;
+    }
+    piecewiseCount = PIECEWISE_STEP_COUNT;
+    return this->exportTempProf(profileFileName);
 
 }
 
 bool TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
 {
-
+    cycleType = SET_PIECEWISE;
+    piecewiseCount = static_cast<unsigned int>(std::min(std::min(tempSize, timeSize), PIECEWISE_STEP_COUNT));
+    for (int i = 0; i < piecewiseCount; i++)
+    {
+        tempProfile[i].temp = temp[i];
+        tempProfile[i].time = time[i];
+    }
+    return this->exportTempProf(profileFileName);
 }
 
 bool TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
 {
-
+    cycleType = SET_PIECEWISE;
+    piecewiseCount = static_cast<unsigned int>(ttdataSize, PIECEWISE_STEP_COUNT);
+    for (int i = 0; i < piecewiseCount; i++)
+    {
+        tempProfile[i] = ttdata[i];
+    }
+    return this->exportTempProf(profileFileName);
 }
 
 bool TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
 {
-
+    cycleType = SET_PIECEWISE;
+    piecewiseCount = static_cast<unsigned int>(std::min(std::min(temp.size(), time.size()), static_cast<const unsigned int>(PIECEWISE_STEP_COUNT)));
+    for (int i = 0; i < piecewiseCount; i++)
+    {
+        tempProfile[i].temp = temp.at(i);
+        tempProfile[i].time = time.at(i);
+    }
+    return this->exportTempProf(profileFileName);
 }
 
 bool TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
 {
+    cycleType = SET_PIECEWISE;
+    piecewiseCount = static_cast<unsigned int>(std::min(static_cast<int>(ttdata.size()), PIECEWISE_STEP_COUNT));
+    for (int i =0; i < piecewiseCount; i++)
+    {
+        tempProfile[i] = ttdata.at(i);
+    }
+    return this->exportTempProf(profileFileName);
+}
 
+bool TMUTempCycle::setPiecewise(const std::vector<TTData*>& ttdata)
+{
+    cycleType = SET_PIECEWISE;
+    piecewiseCount = static_cast<unsigned int>(std::min(static_cast<int>(ttdata.size()), PIECEWISE_STEP_COUNT));
+    for (int i =0; i < piecewiseCount; i++)
+    {
+        tempProfile[i].temp = ttdata.at(i)->temp;
+        tempProfile[i].time = ttdata.at(i)->time;
+    }
+    return this->exportTempProf(profileFileName);
+}
+
+std::vector<TTData> TMUTempCycle::getPiecewise()
+{
+    std::vector<TTData> ttdVect;
+    for (int i = 0; i < piecewiseCount; i++)
+    {
+        ttdVect.push_back(tempProfile[i]);
+    }
+    return ttdVect;
+}
+
+void TMUTempCycle::getTempSpan(double& tStart, double& tStop)
+{
+    tStart = minTemp().temp;
+    tStop = maxTemp().temp;
 }
 
 bool TMUTempCycle::importTempProf(QString fname)
@@ -95,16 +171,18 @@ bool TMUTempCycle::importTempProf(QString fname)
         return false;
     }
 
-
+    bool status = false;
+    cycleType = static_cast<bool>(doc.elementById(XML_CYCLE_TYPE).text().toUInt(&status));
+    period = doc.elementById(XML_PERIOD).text().toDouble(&status);
     QDomNodeList tempKeyList = doc.elementsByTagName(XML_TEMP).at(0).childNodes();
     QDomNodeList timeKeyList = doc.elementsByTagName(XML_TIME).at(0).childNodes();
     QDomNode key;
-    bool status = false;
-    int loopCount = std::max(tempKeyList.size(), timeKeyList.size()) > PIECEWISE_STEP_COUNT ?
+
+    piecewiseCount = std::max(tempKeyList.size(), timeKeyList.size()) > PIECEWISE_STEP_COUNT ?
                     PIECEWISE_STEP_COUNT : std::min(tempKeyList.size(), timeKeyList.size());
 
     int i = 0;
-    for (i = 0; i < loopCount; i++)
+    for (i = 0; i < piecewiseCount; i++)
     {
         // Temperature
         key = tempKeyList.at(i);
@@ -130,6 +208,7 @@ bool TMUTempCycle::importTempProf(QString fname)
             return false;
         }
     }
+
     file.close();
     return true;
 }
@@ -161,16 +240,23 @@ bool TMUTempCycle::exportTempProf(QString fname)
     QDomElement root = doc.createElement(XML_ROOT);
     doc.appendChild(root);
 
-    QDomElement subroot_temp;
+
+    QDomElement subroot_cycleType = doc.createElement(XML_CYCLE_TYPE);
+    root.appendChild(subroot_cycleType);
+    subroot_cycleType.appendChild(doc.createTextNode(QString::number(cycleType)));
+
+    QDomElement subroot_period = doc.createElement(XML_PERIOD);
+    root.appendChild(subroot_period);
+    subroot_period.appendChild(doc.createTextNode(QString::number(period)));
+
+    QDomElement subroot_temp = doc.createElement(XML_TEMP);
     QDomElement tempN;
-    QDomElement subroot_time;
+    QDomElement subroot_time = doc.createElement(XML_TIME);
     QDomElement timeN;
     QDomElement key;
     QDomText val1;
     QString val = "";
-    subroot_temp = doc.createElement(XML_TEMP);
     root.appendChild(subroot_temp);
-    subroot_time = doc.createElement(XML_TIME);
     root.appendChild(subroot_time);
 
     unsigned int i = 0;
@@ -223,4 +309,48 @@ void TMUTempCycle::debugExportImport()
         qDebug() << "Debug Temp: " << QString::number(t.temp);
         qDebug() << "Debug Time: " << QString::number(t.time);
     }
+}
+
+TTData TMUTempCycle::minTemp()
+{
+    int minIndex = 0;
+    for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
+    {
+        minIndex == tempProfile[i].temp < tempProfile[minIndex].temp ?
+                    i : minIndex;
+    }
+    return tempProfile[minIndex];
+}
+
+TTData TMUTempCycle::minTime()
+{
+    int minIndex = 0;
+    for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
+    {
+        minIndex == tempProfile[i].time < tempProfile[minIndex].time ?
+                    i : minIndex;
+    }
+    return tempProfile[minIndex];
+}
+
+TTData TMUTempCycle::maxTemp()
+{
+    int maxIndex = 0;
+    for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
+    {
+        maxIndex == tempProfile[i].temp > tempProfile[maxIndex].temp ?
+                    i : maxIndex;
+    }
+    return tempProfile[maxIndex];
+}
+
+TTData TMUTempCycle::maxTime()
+{
+    int maxIndex = 0;
+    for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
+    {
+        maxIndex == tempProfile[i].time > tempProfile[maxIndex].time ?
+                    i : maxIndex;
+    }
+    return tempProfile[maxIndex];
 }

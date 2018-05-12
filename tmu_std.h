@@ -77,6 +77,7 @@
 #define DAEMON_CHECK_PERIOD 500 // ms (= 0.5 second)
 #define TEMP_CYCLE_CHECK_PERIOD (2*DAEMON_CHECK_PERIOD)
 #define SAWTOOTH_PER_MIN 30
+#define PIECEWISE_TIME_STEP_MIN 1
 // --------------------------------------------
 
 // ------------- LATCH ADDRESSES AND NUMBERS --------------

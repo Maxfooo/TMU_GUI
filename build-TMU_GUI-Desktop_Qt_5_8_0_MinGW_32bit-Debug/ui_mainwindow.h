@@ -234,6 +234,8 @@ public:
     QPushButton *pushButton_20;
     QFrame *line;
     QPushButton *pushButton_21;
+    QPushButton *pushButton_22;
+    QPushButton *pushButton_23;
     QWidget *horizontalLayoutWidget_15;
     QHBoxLayout *horizontalLayout_19;
     QLabel *label_60;
@@ -1475,7 +1477,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(370, 90, 231, 331));
+        tableWidget->setGeometry(QRect(370, 90, 241, 331));
         groupBox_9 = new QGroupBox(tab_2);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         groupBox_9->setGeometry(QRect(20, 90, 331, 71));
@@ -1502,7 +1504,7 @@ public:
         horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
         lineEdit_3 = new QLineEdit(gridLayoutWidget_9);
         lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
-        lineEdit_3->setEnabled(false);
+        lineEdit_3->setEnabled(true);
 
         horizontalLayout_16->addWidget(lineEdit_3);
 
@@ -1518,7 +1520,7 @@ public:
 
         lineEdit_4 = new QLineEdit(gridLayoutWidget_9);
         lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
-        lineEdit_4->setEnabled(false);
+        lineEdit_4->setEnabled(true);
 
         horizontalLayout_16->addWidget(lineEdit_4);
 
@@ -1535,7 +1537,7 @@ public:
         horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
         lineEdit_5 = new QLineEdit(gridLayoutWidget_9);
         lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
-        lineEdit_5->setEnabled(false);
+        lineEdit_5->setEnabled(true);
 
         horizontalLayout_18->addWidget(lineEdit_5);
 
@@ -1552,7 +1554,7 @@ public:
         groupBox_12->setGeometry(QRect(20, 190, 331, 231));
         pushButton_18 = new QPushButton(groupBox_12);
         pushButton_18->setObjectName(QStringLiteral("pushButton_18"));
-        pushButton_18->setGeometry(QRect(10, 40, 141, 23));
+        pushButton_18->setGeometry(QRect(10, 40, 151, 23));
         pushButton_19 = new QPushButton(groupBox_12);
         pushButton_19->setObjectName(QStringLiteral("pushButton_19"));
         pushButton_19->setGeometry(QRect(170, 40, 151, 23));
@@ -1562,11 +1564,11 @@ public:
         lineEdit_26 = new QLineEdit(groupBox_12);
         lineEdit_26->setObjectName(QStringLiteral("lineEdit_26"));
         lineEdit_26->setEnabled(true);
-        lineEdit_26->setGeometry(QRect(10, 80, 311, 20));
+        lineEdit_26->setGeometry(QRect(10, 110, 311, 20));
         lineEdit_26->setReadOnly(true);
         pushButton_20 = new QPushButton(groupBox_12);
         pushButton_20->setObjectName(QStringLiteral("pushButton_20"));
-        pushButton_20->setGeometry(QRect(10, 120, 311, 31));
+        pushButton_20->setGeometry(QRect(10, 140, 311, 31));
         QFont font;
         font.setPointSize(15);
         font.setBold(true);
@@ -1576,17 +1578,23 @@ public:
         pushButton_20->setFont(font);
         line = new QFrame(groupBox_12);
         line->setObjectName(QStringLiteral("line"));
-        line->setGeometry(QRect(10, 160, 311, 16));
+        line->setGeometry(QRect(10, 170, 311, 16));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
         pushButton_21 = new QPushButton(groupBox_12);
         pushButton_21->setObjectName(QStringLiteral("pushButton_21"));
-        pushButton_21->setGeometry(QRect(10, 180, 311, 31));
+        pushButton_21->setGeometry(QRect(10, 190, 311, 31));
         QFont font1;
         font1.setPointSize(15);
         font1.setBold(true);
         font1.setWeight(75);
         pushButton_21->setFont(font1);
+        pushButton_22 = new QPushButton(groupBox_12);
+        pushButton_22->setObjectName(QStringLiteral("pushButton_22"));
+        pushButton_22->setGeometry(QRect(10, 70, 151, 23));
+        pushButton_23 = new QPushButton(groupBox_12);
+        pushButton_23->setObjectName(QStringLiteral("pushButton_23"));
+        pushButton_23->setGeometry(QRect(170, 70, 151, 23));
         horizontalLayoutWidget_15 = new QWidget(tab_2);
         horizontalLayoutWidget_15->setObjectName(QStringLiteral("horizontalLayoutWidget_15"));
         horizontalLayoutWidget_15->setGeometry(QRect(20, 170, 111, 21));
@@ -1932,6 +1940,8 @@ public:
         pushButton_19->setText(QApplication::translate("MainWindow", "Revert Profile", Q_NULLPTR));
         pushButton_20->setText(QApplication::translate("MainWindow", "Run", Q_NULLPTR));
         pushButton_21->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
+        pushButton_22->setText(QApplication::translate("MainWindow", "Overwrite Profile", Q_NULLPTR));
+        pushButton_23->setText(QApplication::translate("MainWindow", "Remove Profile", Q_NULLPTR));
         label_60->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600; font-style:italic;\">Save Profile</span></p></body></html>", Q_NULLPTR));
         infoButton_SaveProfile->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
         groupBox_13->setTitle(QString());

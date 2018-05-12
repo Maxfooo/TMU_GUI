@@ -7,6 +7,7 @@
 #include <QString>
 #include <QTimer>
 #include <QObject>
+#include <vector>
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
 #include "tmu.h"
@@ -15,7 +16,8 @@
 extern QString CONFIG_FILE_PREFIX;
 const QString GENERIC_PROFILE_FILE_NAME = "Temperature_Profile_0.xml";
 
-
+#define SET_SAWTOOTH 1
+#define SET_PIECEWISE 0
 
 struct TTData {
     double temp;
@@ -41,7 +43,14 @@ public:
     bool setPiecewise(TTData* ttdata, int ttdataSize);
     bool setPiecewise(const std::vector<double>& temp, const std::vector<double>& time);
     bool setPiecewise(const std::vector<TTData>& ttdata);
+    bool setPiecewise(const std::vector<TTData*>& ttdata);
+    std::vector<TTData> getPiecewise();
+    void setCycleType(bool isSawtooth);
+    void setPeriod(unsigned int period) {this->period = period;}
+    unsigned int getPeriod() { return period;}
+    void getTempSpan(double& tStart, double& tStop);
     bool isReady() { return tmuTempCycleReady;}
+    bool isSawtooth() { return cycleType;}
     void start();
     void pause();
     void resume();
@@ -58,8 +67,13 @@ private:
     QString profileFileName = GENERIC_PROFILE_FILE_NAME;
     QString errStr = "";
     bool tmuTempCycleReady = false;
+    bool cycleType = SET_SAWTOOTH;
+    unsigned int period = 0;
+    unsigned int piecewiseCount = 0;
 
     const QString XML_ROOT = "Temperature_Profile";
+    const QString XML_CYCLE_TYPE = "Cycle_Type";
+    const QString XML_PERIOD = "Period";
     const QString XML_TEMP = "Temperature";
     QString XML_TEMP_N = "C%1";
     const QString XML_TIME = "Time";
@@ -70,6 +84,11 @@ private:
 
     bool exportTempProf(QString fname);
     bool exportTempProf();
+
+    TTData minTemp();
+    TTData minTime();
+    TTData maxTemp();
+    TTData maxTime();
 
 };
 

@@ -1327,7 +1327,27 @@ void MainWindow::loadTempCycleCB()
 void MainWindow::loadTempCycleTab(TMUTempCycle* ttc)
 {
     // ttc should be set up with the correct file in it's attributes
-
+    double tStart = TEMP_CELSIUS_MIN;
+    double tStop = TEMP_CELSIUS_MAX;
+    std::vector<TTData> ttdVect;
+    QTableWidget* pTable = ui->tableWidget;
+    if (ttc->isSawtooth())
+    {
+        on_radioButton_5_clicked();
+        ttc->getTempSpan(tStart, tStop);
+        ui->lineEdit_3->setText(QString::number(tStart));
+        ui->lineEdit_4->setText(QString::number(tStop));
+        ui->lineEdit_5->setText(QString::number(ttc->getPeriod()));
+    }
+    else
+    {
+        ttdVect = tmuTempCycle[PRIMARY_TMU_ID]->getPiecewise();
+        for (int i = 0; i < ttdVect.size(); i++)
+        {
+            pTable->itemAt(0, i)->setText(QString::number(ttdVect.at(i).temp));
+            pTable->itemAt(1, i)->setText(QString::number(ttdVect.at(i).time));
+        }
+    }
 }
 
 QString MainWindow::saveTempCycleProfileFileName(QString fname)
@@ -1342,7 +1362,7 @@ QString MainWindow::saveTempCycleProfileFileName(QString fname)
         #ifdef DEBUG
             qDebug() << "Unable to open config-file file";
         #endif
-        return;
+        return temp;
     }
     QTextStream in(&file);
 
@@ -1390,6 +1410,14 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
     }
 
     // Setup and tmutempcycle
+    bool status = false;
+    double tStart = ui->lineEdit_3->text().toDouble(&status);
+    double tStop = ui->lineEdit_4->text().toDouble(&status);
+    unsigned int period = ui->lineEdit_5->text().toUInt(&status);
+    QTableWidget* pTable = ui->tableWidget;
+    QTableWidgetItem* pItem;
+    TTData* ttData;
+    std::vector<TTData*> ttdVect;
     if (ui->radioButton_5->isChecked())
     {
         // Sawtooth
@@ -1398,7 +1426,46 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
     else
     {
         // Piecewise
+        for (int i=0; i < PIECEWISE_STEP_COUNT; i++)
+        {
+            ttData = new TTData;
+            pItem = pTable->itemAt(0, i);
+            ttData->temp = pItem->text().toDouble(&status);
+            if (!status)
+            {
+                post("A temperature value in the Piecewise Table is invalid.");
+                return;
+            }
+            if (ttData->temp > TEMP_CELSIUS_MAX)
+            {
+                post("A temperature value in the Piecewise Table is too large.");
+                post(QString("Setting value to maxmimum value of %1").arg(TEMP_CELSIUS_MAX));
+                ttData->temp = TEMP_CELSIUS_MAX;
+            }
+            else if (ttData->temp <  TEMP_CELSIUS_MIN)
+            {
+                post("A temperature value in the Piecewise Table is too small.");
+                post(QString("Setting value to minimum value of %1").arg(TEMP_CELSIUS_MIN));
+                ttData->temp = TEMP_CELSIUS_MIN;
+            }
 
+            pItem = pTable->itemAt(1, i);
+            ttData->time = pItem->text().toUInt(&status);
+            if (!status)
+            {
+                post("A time entry in the Piecewise Table is invalid.");
+                return;
+            }
+            if (ttData->time <  PIECEWISE_TIME_STEP_MIN)
+            {
+                post("A time value in the Piecewise Table is too small.");
+                post(QString("Setting the value to the minimum value of %1").arg(PIECEWISE_TIME_STEP_MIN));
+                ttData->time = PIECEWISE_TIME_STEP_MIN;
+            }
+
+            ttdVect.push_back(ttData);
+        }
+        tmuTempCycle[PRIMARY_TMU_ID]->setPiecewise(ttdVect);
     }
 }
 
@@ -1424,11 +1491,6 @@ void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
         post("Temperature Cycle is not setup properly or ready to go.");
         return;
     }
-
-    bool status = false;
-    double tStart = ui->lineEdit_3->text().toDouble(&status);
-    double tStop = ui->lineEdit_4->text().toDouble(&status);
-    unsigned int period = ui->lineEdit_5->text().toUInt(&status);
 
     if (tempCycleState == TEMP_CYCLE_STOP)
     {

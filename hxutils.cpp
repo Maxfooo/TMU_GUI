@@ -171,3 +171,25 @@ void HxUtils::qByteArrayToUcharArray(QByteArray &byteArray, uchar *buffer, uchar
         buffer[i] = byteArray[i];
     }
 }
+
+template <class T>
+T HxUtils::arrMin(T* arr, int size)
+{
+    T min = arr[0];
+    for (int i = 0; i < size; i++)
+    {
+        min = std::min(min, arr[i]);
+    }
+    return min;
+}
+
+template <class T>
+T HxUtils::arrMax(T* arr, int size)
+{
+    T max = arr[0];
+    for (int i = 0; i < size; i++)
+    {
+        max = std::max(max, arr[i]);
+    }
+    return max;
+}

@@ -1620,7 +1620,7 @@ font-style:italic;
        <rect>
         <x>370</x>
         <y>90</y>
-        <width>231</width>
+        <width>241</width>
         <height>331</height>
        </rect>
       </property>
@@ -1676,7 +1676,7 @@ font-style:italic;
           <item>
            <widget class="QLineEdit" name="lineEdit_3">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1697,7 +1697,7 @@ font-style:italic;
           <item>
            <widget class="QLineEdit" name="lineEdit_4">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1715,7 +1715,7 @@ font-style:italic;
           <item>
            <widget class="QLineEdit" name="lineEdit_5">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>

@@ -28,6 +28,10 @@ public:
     static uchar calcChecksum(uchar *buffer, uchar numBytes);
     static QByteArray ucharArrayToQByteArray(uchar *buffer, uchar size);
     static void qByteArrayToUcharArray(QByteArray &byteArray, uchar *buffer, uchar size);
+    template <class T>
+    static T arrMin(T* arr, int size);
+    template <class T>
+    static T arrMax(T* arr, int size);
 };
 
 #endif // HXUTILS_H

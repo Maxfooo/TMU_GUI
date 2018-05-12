@@ -276,6 +276,10 @@ private:
     void removeConfigFileName(QString fname);
     void loadConfigFileNames();
 
+    void loadTempCycleCB();
+    void loadTempCycleTab(TMUTempCycle* ttc);
+    QString saveTempCycleProfileFileName(QString fname);
+
     QString info_HeaterOptions  = "<html>"
                                   "<body>"
                                   "<h1>Heater Options</h1>"

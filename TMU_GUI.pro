@@ -59,12 +59,8 @@ DEPENDPATH += $$PWD/.
 
 DISTFILES += \
     TO_DO.txt \
-    ftd2xx.lib \
-    ftd2xx64.dll \
     SaveMyUI_README.txt \
-    TestingComm.xml \
-    ConfigFileNames.txt \
-    build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/Temperature_Profile_0.xml
+    build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/temp_profile_0.xml
 
 RESOURCES += \
     tmu_resources.qrc
