@@ -13,7 +13,6 @@
 #include "tmutempcycle.h"
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
-#define NUM_OF_TEMP_CYCLE_TMUS 9
 
 extern QString CONFIG_FILE_PREFIX;
 
@@ -209,6 +208,9 @@ public slots:
     void reportError(QString);
     void reportBusy();
 
+    void wrRegSlot(uchar id);
+    void rdRegSlot(uchar id);
+
 private:
     Ui::MainWindow *ui;
 
@@ -244,24 +246,28 @@ private:
 
     // Comm functions
     void handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx);
-    void writeRegFromInterface();
-    void readRegToInterface();
-    void fillReadbackPacket();
-    void detectTMUWrite();
-    void detectTMURead();
-    void TMUDetected(bool d);
+    void writeRegFromInterface(uchar id);
+    void readRegToInterface(uchar id);
+    void fillReadbackPacket(uchar id);
+    void detectTMUWrite(uchar id);
+    void detectTMURead(uchar id);
+    void TMUDetected(bool d, uchar id);
     void OTPProgrammed(bool o);
     void debugReadback();
     void refreshMicro();
+    void setTMUChannel(uchar id);
 
     //TMU object
-    TMU* tmu;
-    TMUDaemon* tmuDaemon;
-    TMUTempCycle* tmuTempCycle[NUM_OF_TEMP_CYCLE_TMUS];
+    TMU* tmu[NUM_OF_TMUS];
+    TMUDaemon* tmuDaemon[NUM_OF_TMUS];
+    TMUTempCycle* tmuTempCycle[NUM_OF_TMUS];
     TempCycleState tempCycleState = TEMP_CYCLE_STOP;
+    uchar readbackID = PRIMARY_TMU_ID;
 
     void initGeneralConfigTab();
     void initTempCycleTab();
+    void initTMUs();
+    void initTMUDaemons();
     void initTempCycleTMUs();
     void initAdvancedTab();
     void updateAdvancedTab();

@@ -56,6 +56,9 @@ public:
     void resume();
     void stop();
 
+signals:
+    void updateTMU(uchar id);
+
 public slots:
     void updateHeatLatch();
 

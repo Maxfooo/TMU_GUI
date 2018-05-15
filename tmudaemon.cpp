@@ -1,7 +1,8 @@
 #include "tmudaemon.h"
 
-TMUDaemon::TMUDaemon(TMU *tmu)
+TMUDaemon::TMUDaemon(uchar id, TMU *tmu)
 {
+    this->id = id;
     this->tmu = tmu;
     checkTimer = new QTimer;
     checkTimer->setInterval(DAEMON_CHECK_PERIOD);
@@ -38,6 +39,12 @@ void TMUDaemon::checkTemperature()
     tmu->mutex.lock();
     // check temperature of TMU
     // will be through the MUX in the TMU
+
+    // MUST EMIT SIGNAL THAT THE MAINWINDOW PICKS UP
+    // IN ORDER TO SEND THE INFORMATION VIA THE COMM LINE
+    emit this->rxTemperature(this->id);
+
+
     tmu->mutex.unlock();
     this->start();
 }

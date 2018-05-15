@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowIcon(QIcon(":/images/hexius_semicondutor_favicon_transparent.ico"));
 
     /****** Setup tmu object ******/
-    tmu = new TMU();
-    tmuDaemon = new TMUDaemon(tmu);
+    initTMUs();
+    initTMUDaemons();
     initTempCycleTMUs();
 
     /****** Setup USB Communication ******/
@@ -63,18 +63,39 @@ void MainWindow::post(QString s)
     ui->textBrowser_2->append(s);
 }
 
+void MainWindow::initTMUs()
+{
+    for (auto& t: tmu)
+    {
+        t = new TMU();
+    }
+}
+
+void MainWindow::initTMUDaemons()
+{
+    for (uchar i = 0; i < NUM_OF_TMUS; i++)
+    {
+        tmuDaemon[i] = new TMUDaemon(i, tmu[i]);
+        connect(tmuDaemon[i], SIGNAL(rxTemperature(uchar id)), this, SLOT(rdRegSlot(uchar id)));
+    }
+}
+
 void MainWindow::initTempCycleTMUs()
 {
-    for (uchar i = 0; i < NUM_OF_TEMP_CYCLE_TMUS; i++)
+    for (uchar i = 0; i < NUM_OF_TMUS; i++)
     {
-        tmuTempCycle[i] = new TMUTempCycle(i, tmu);
+        tmuTempCycle[i] = new TMUTempCycle(i, tmu[i]);
+        connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar id)), this, SLOT(wrRegSlot(uchar id)));
     }
 }
 
 void MainWindow::on_pushButton_3_clicked() // Program OTP
 {
-
+    setTMUChannel(PRIMARY_TMU_ID);
+    //continue
 }
+
+
 
 //////////////////////////////////////
 // USB Comm GUI Update Slots
@@ -151,7 +172,7 @@ void MainWindow::reportError(QString errorString)
     post(errorString);
     if (commState == COMM_DETECT_DUT_RD)
     {
-        TMUDetected(false);
+        TMUDetected(false, PRIMARY_TMU_ID);
     }
 
     commState = COMM_IDLE;
@@ -171,17 +192,17 @@ void MainWindow::updateDataInfo()
         break;
 
     case COMM_DETECT_DUT_RD:
-        detectTMURead();
+        detectTMURead(readbackID);
         break;
 
     case COMM_TX_REG_FROM_INTERFACE:
         debugReadback();
-        writeRegFromInterface();
+        writeRegFromInterface(readbackID);
         break;
 
     case COMM_RX_REG_TO_INTERFACE:
-        fillReadbackPacket();
-        readRegToInterface();
+        fillReadbackPacket(readbackID);
+        readRegToInterface(readbackID);
         break;
 
     case COMM_TX_OTP_FROM_INTERFACE:
@@ -240,12 +261,13 @@ void MainWindow::handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx)
 
 }
 
-void MainWindow::writeRegFromInterface()
+void MainWindow::writeRegFromInterface(uchar id)
 {
-    tmu->getWriteRegPkt(tmuTxPkt);
+    readbackID = id;
+    setTMUChannel(id);
+    tmu[id]->getWriteRegPkt(tmuTxPkt);
 
     commState = COMM_TX_REG_FROM_INTERFACE;
-    uchar tempIndex = 0;
 
     if (tmu_index >= NUM_OF_LATCHES)
     {
@@ -258,12 +280,22 @@ void MainWindow::writeRegFromInterface()
     }
 }
 
-void MainWindow::readRegToInterface()
+void MainWindow::wrRegSlot(uchar id)
+{
+    this->writeRegFromInterface(id);
+}
+
+void MainWindow::readRegToInterface(uchar id)
 {
 
 }
 
-void MainWindow::fillReadbackPacket()
+void MainWindow::rdRegSlot(uchar id)
+{
+
+}
+
+void MainWindow::fillReadbackPacket(uchar id)
 {
     //    uchar numRxBytes;
     //    uchar cmdByte;
@@ -280,8 +312,11 @@ void MainWindow::fillReadbackPacket()
 
 }
 
-void MainWindow::detectTMUWrite()
+void MainWindow::detectTMUWrite(uchar id)
 {
+    readbackID = id;
+    setTMUChannel(id);
+
 #ifdef DEBUG
     uchar rxROM[5] = {CMD_RD_ROM, 0x01, 0x00, 1, 0};
     rxROM[4] = HxUtils::calcChecksum(rxROM, 4);
@@ -293,7 +328,7 @@ void MainWindow::detectTMUWrite()
 #endif
 }
 
-void MainWindow::detectTMURead()
+void MainWindow::detectTMURead(uchar id)
 {
     commState = COMM_IDLE;
     uchar numRxBytes;
@@ -306,22 +341,22 @@ void MainWindow::detectTMURead()
 
     if (numRxBytes >= 3)
     {
-        tmu->setAsicRev(rxBuffer[1]);
-        TMUDetected(true);
+        tmu[id]->setAsicRev(rxBuffer[1]);
+        TMUDetected(true, id);
     }
     else
     {
-        TMUDetected(false);
+        TMUDetected(false, id);
     }
 
 }
 
-void MainWindow::TMUDetected(bool d)
+void MainWindow::TMUDetected(bool d, uchar id)
 {
     if (d)
     {
         ui->label_28->setText("Yes");
-        ui->label_38->setText("0x" + QString::number(tmu->getAsicRev(), 16));
+        ui->label_38->setText("0x" + QString::number(tmu[id]->getAsicRev(), 16));
     }
     else
     {
@@ -352,6 +387,14 @@ void MainWindow::debugReadback()
     hxUSBComm->getReadbackData(&cmdByte, rxBuffer, &numRxBytes);
     qDebug() << "DEBUG READBACK: " << utils::ucharArrayToQString(rxBuffer, numRxBytes);
 }
+
+void MainWindow::setTMUChannel(uchar id)
+{
+    // Use I2C to tell I2C bus mux which TMU to talk to
+
+}
+
+
 /**************************************/
 //
 //  GENERAL CONFIGURATION TAB
@@ -360,6 +403,8 @@ void MainWindow::debugReadback()
 
 void MainWindow::initGeneralConfigTab()
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
+
     // Mux Channels
     QStringList muxChannels = tmu->getMuxChannelNames();
     for (int i = 0; i < muxChannels.size(); i++)
@@ -449,6 +494,7 @@ void MainWindow::on_radioButton_10_clicked() // NPN External Heater RB
 
 void MainWindow::enableIHBox()
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     ui->groupBox_4->setEnabled(true);
     ui->groupBox_5->setEnabled(false);
     tmu->setIntOrExtHeater(SET_INTERNAL_HEATER);
@@ -463,6 +509,7 @@ void MainWindow::enableIHBox()
 
 void MainWindow::enableEHBox(bool nmosOrNpn)
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     ui->groupBox_5->setEnabled(true);
     ui->lineEdit_7->setEnabled(true);
     ui->lineEdit_8->setEnabled(true);
@@ -481,6 +528,7 @@ void MainWindow::enableEHBox(bool nmosOrNpn)
 
 void MainWindow::on_lineEdit_6_editingFinished() // Internal Heater Current Limit
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     bool status = false;
 
     // Check to make sure the entered value is within the
@@ -505,6 +553,7 @@ void MainWindow::on_lineEdit_6_editingFinished() // Internal Heater Current Limi
 
 void MainWindow::on_lineEdit_9_editingFinished() // External Heater Current Limit
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -528,6 +577,7 @@ void MainWindow::on_lineEdit_9_editingFinished() // External Heater Current Limi
 
 void MainWindow::on_lineEdit_7_editingFinished() // Value of heater resistors
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -555,6 +605,7 @@ void MainWindow::on_lineEdit_7_editingFinished() // Value of heater resistors
 
 void MainWindow::on_lineEdit_8_editingFinished() // Number of heater legs
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -599,6 +650,7 @@ void MainWindow::on_radioButton_4_clicked() // Enter DAC Code RB
 
 void MainWindow::on_lineEdit_editingFinished() // Enter Celsius LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -627,6 +679,7 @@ void MainWindow::on_lineEdit_editingFinished() // Enter Celsius LE
 
 void MainWindow::on_lineEdit_2_editingFinished() // Enter DAC LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -649,6 +702,7 @@ void MainWindow::on_lineEdit_2_editingFinished() // Enter DAC LE
 
 void MainWindow::on_lineEdit_15_editingFinished() // Thermistor Value @25C LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -671,6 +725,7 @@ void MainWindow::on_lineEdit_15_editingFinished() // Thermistor Value @25C LE
 
 void MainWindow::on_lineEdit_16_editingFinished() // Thermistor Beta LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -697,6 +752,7 @@ void MainWindow::on_lineEdit_16_editingFinished() // Thermistor Beta LE
 
 void MainWindow::on_comboBox_currentIndexChanged(int index) // Range Resistor Dropdown
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // "index" param does not work
     int cbIndex = ui->comboBox->currentIndex();
     tmu->setRangeRes(cbIndex);
@@ -704,6 +760,7 @@ void MainWindow::on_comboBox_currentIndexChanged(int index) // Range Resistor Dr
 
 void MainWindow::on_comboBox_2_currentIndexChanged(int index) // Gain Resistor
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // "index" param does not work
     int cbIndex = ui->comboBox_2->currentIndex();
     tmu->setGainRes(cbIndex);
@@ -715,6 +772,7 @@ void MainWindow::on_comboBox_2_currentIndexChanged(int index) // Gain Resistor
 
 void MainWindow::on_lineEdit_23_editingFinished() // Ambient Resistance LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -731,6 +789,7 @@ void MainWindow::on_lineEdit_23_editingFinished() // Ambient Resistance LE
 
 void MainWindow::on_lineEdit_24_editingFinished() // Material Resistance LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -747,6 +806,7 @@ void MainWindow::on_lineEdit_24_editingFinished() // Material Resistance LE
 
 void MainWindow::on_lineEdit_25_editingFinished() // Ambient Capacitance LE
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // Check to make sure the entered value is within the
     // respective boundaries.
     bool status = false;
@@ -779,7 +839,7 @@ void MainWindow::on_pushButton_4_clicked() // Detect TMU (Gen. Tab)
 //        tempTxBuffer[2] = 0x00;
 //        hxUSBComm->writeData(cmdByte, tempTxBuffer, 3);
 //    }
-    detectTMUWrite();
+    detectTMUWrite(PRIMARY_TMU_ID);
 }
 
 void MainWindow::on_pushButton_2_clicked() // Load Registers from Configuration (Gen. Tab)
@@ -787,7 +847,7 @@ void MainWindow::on_pushButton_2_clicked() // Load Registers from Configuration 
     // the "tmu" object should already be up to date with what is
     // selected on the interface.
 
-    writeRegFromInterface();
+    writeRegFromInterface(PRIMARY_TMU_ID);
 }
 
 
@@ -810,6 +870,7 @@ void MainWindow::on_pushButton_6_clicked() // Operate from OTP (Gen. Tab)
 
 void MainWindow::initAdvancedTab()
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     QStringList latchNames = tmu->getLatchNames();
 
     ui->label_47->setText(tmu->latches[0]->name);
@@ -839,6 +900,7 @@ void MainWindow::initAdvancedTab()
 
 void MainWindow::updateAdvancedTab()
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     QString l0 = QString("%1").arg(utils::ucharToHexQString(tmu->latches[0]->txPkt[VAL_HI_INDEX], false) + utils::ucharToHexQString(tmu->latches[0]->txPkt[VAL_LO_INDEX], false));
     QString l1 = QString("%1").arg(utils::ucharToHexQString(tmu->latches[1]->txPkt[VAL_HI_INDEX], false) + utils::ucharToHexQString(tmu->latches[1]->txPkt[VAL_LO_INDEX], false));
     QString l2 = QString("%1").arg(utils::ucharToHexQString(tmu->latches[2]->txPkt[VAL_HI_INDEX], false) + utils::ucharToHexQString(tmu->latches[2]->txPkt[VAL_LO_INDEX], false));
@@ -1139,6 +1201,7 @@ void MainWindow::on_comboBox_4_currentIndexChanged(int index) // Current Configu
 
 void MainWindow::on_comboBox_3_currentIndexChanged(int index) // Mux Channel Dropdown
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     // "index" param does not work
     int cbIndex = ui->comboBox_3->currentIndex();
     tmu->setMuxChannel(cbIndex);
@@ -1156,12 +1219,14 @@ void MainWindow::on_pushButton_clicked() // Mux Read Button
 
 void MainWindow::on_radioButton_8_clicked() // Vref Enable
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     tmu->setEnableVref(true);
 }
 
 
 void MainWindow::on_radioButton_9_clicked() // Vref Disable
 {
+    TMU* tmu = this->tmu[PRIMARY_TMU_ID];
     tmu->setEnableVref(false);
 }
 
@@ -1171,12 +1236,12 @@ void MainWindow::on_radioButton_9_clicked() // Vref Disable
 
 void MainWindow::on_pushButton_14_clicked() // Detect TMU (Adv. Tab)
 {
-    detectTMUWrite();
+    detectTMUWrite(PRIMARY_TMU_ID);
 }
 
 void MainWindow::on_pushButton_15_clicked() // Load Registers From Configuration (Adv. Tab)
 {
-    writeRegFromInterface();
+    writeRegFromInterface(PRIMARY_TMU_ID);
 }
 
 void MainWindow::on_pushButton_16_clicked() // Operate from Registers (Adv. Tab)
@@ -1501,7 +1566,7 @@ void MainWindow::on_pushButton_20_clicked() // RUN temp profile PB
         tempCycleState = TEMP_CYCLE_START;
         ui->pushButton_20->setText("Pause");
         procRunLE->startProcRun();
-        tmuDaemon->start();
+        tmuDaemon[PRIMARY_TMU_ID]->start();
         tmuTempCycle[PRIMARY_TMU_ID]->start();
     }
     else if (tempCycleState == TEMP_CYCLE_START || tempCycleState == TEMP_CYCLE_RESUME)
@@ -1525,7 +1590,7 @@ void MainWindow::on_pushButton_21_clicked() // STOP temp profile PB
     tempCycleState = TEMP_CYCLE_STOP;
     ui->pushButton_20->setText("Start");
     procRunLE->stopProcRun();
-    tmuDaemon->stop();
+    tmuDaemon[PRIMARY_TMU_ID]->stop();
     tmuTempCycle[PRIMARY_TMU_ID]->stop();
 }
 

@@ -42,12 +42,17 @@ void TMUTempCycle::stop()
 void TMUTempCycle::updateHeatLatch()
 {
     // Just check the tmu HEAT latch VARIABLE
+
+
     // If it meets the next temperature step
-    // then, if necessary, update the HEAT latch
-    // on the TMU chip.
+    // then update the HEAT latch on the TMU chip.
 
     this->stop();
 
+    // EMIT A SIGNAL--WITH PARAMETER TMU_ID--TO HAVE THE MAINWINDOW
+    // COMMUNICATE TO THE CORRECT TMU
+    // THIS WILL BE USING THE I2C BUS MUTLIPLEXOR
+    emit this->updateTMU(this->id);
 
     this->start();
 }
@@ -64,6 +69,7 @@ bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
     int j = 0;
     for (int i = 0; i < PIECEWISE_STEP_COUNT; i++)
     {
+        // Half up and half back down
         if (i < PIECEWISE_STEP_COUNT/2)
         {
             temperature = tStart + i*tempStep;
@@ -165,9 +171,9 @@ bool TMUTempCycle::importTempProf(QString fname)
     if (!file.open(QIODevice::ReadOnly) || !doc.setContent(&file))
     {
         errStr = QString("Could not open %1 for IMPORTING temperature profile.").arg(fname);
-#ifdef DEBUG
-       qDebug() << errStr;
-#endif
+        #ifdef DEBUG
+               qDebug() << errStr;
+        #endif
         return false;
     }
 
@@ -190,9 +196,9 @@ bool TMUTempCycle::importTempProf(QString fname)
         if (!status)
         {
             errStr = QString("Failed to IMPORT, file corrupted: %1").arg(fname);
-#ifdef DEBUG
-       qDebug() << errStr;
-#endif
+            #ifdef DEBUG
+                   qDebug() << errStr;
+            #endif
             return false;
         }
 
@@ -202,9 +208,9 @@ bool TMUTempCycle::importTempProf(QString fname)
         if (!status)
         {
             errStr = QString("Failed to IMPORT, file corrupted: %1").arg(fname);
-#ifdef DEBUG
-       qDebug() << errStr;
-#endif
+            #ifdef DEBUG
+                   qDebug() << errStr;
+            #endif
             return false;
         }
     }

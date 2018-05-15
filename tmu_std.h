@@ -16,6 +16,8 @@
 
 #define C_TO_K 273.15
 
+#define NUM_OF_TMUS 9
+
 // --------------- Packet info ----------------
 #define NUM_OF_LATCHES 5
 #define SIZE_OF_TX_LATCH_PKT 5
