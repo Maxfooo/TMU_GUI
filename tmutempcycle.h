@@ -7,13 +7,14 @@
 #include <QString>
 #include <QTimer>
 #include <QObject>
+#include <QDomDocument>
+#include <QDomElement>
 #include <vector>
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
 #include "tmu.h"
 
 
-extern QString CONFIG_FILE_PREFIX;
 const QString GENERIC_PROFILE_FILE_NAME = "Temperature_Profile_0.xml";
 
 #define SET_SAWTOOTH 1
@@ -55,6 +56,9 @@ public:
     void pause();
     void resume();
     void stop();
+
+    bool loadTempProfile() { return importTempProf();}
+    bool loadTempProfile(QString fname) { return importTempProf(fname);}
 
 signals:
     void updateTMU(uchar id);

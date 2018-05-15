@@ -60,7 +60,10 @@ DEPENDPATH += $$PWD/.
 DISTFILES += \
     TO_DO.txt \
     SaveMyUI_README.txt \
-    build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/temp_profile_0.xml
+    build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/temp_profile_0.xml \
+    temp_profile_0.xml \
+    TempCycleProfiles.txt \
+    temp_profile_1.xml
 
 RESOURCES += \
     tmu_resources.qrc

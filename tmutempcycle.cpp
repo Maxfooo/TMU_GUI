@@ -163,7 +163,6 @@ void TMUTempCycle::getTempSpan(double& tStart, double& tStop)
 
 bool TMUTempCycle::importTempProf(QString fname)
 {
-    fname = fname.prepend(CONFIG_FILE_PREFIX);
     fname = fname.contains(".xml") ? fname : fname.append(".xml");
 
     QDomDocument doc;
@@ -174,12 +173,13 @@ bool TMUTempCycle::importTempProf(QString fname)
         #ifdef DEBUG
                qDebug() << errStr;
         #endif
+        tmuTempCycleReady = false;
         return false;
     }
 
     bool status = false;
-    cycleType = static_cast<bool>(doc.elementById(XML_CYCLE_TYPE).text().toUInt(&status));
-    period = doc.elementById(XML_PERIOD).text().toDouble(&status);
+    cycleType = static_cast<bool>(doc.elementsByTagName(XML_CYCLE_TYPE).at(0).toElement().text().toUInt(&status));
+    period = doc.elementsByTagName(XML_PERIOD).at(0).toElement().text().toDouble(&status);
     QDomNodeList tempKeyList = doc.elementsByTagName(XML_TEMP).at(0).childNodes();
     QDomNodeList timeKeyList = doc.elementsByTagName(XML_TIME).at(0).childNodes();
     QDomNode key;
@@ -199,6 +199,7 @@ bool TMUTempCycle::importTempProf(QString fname)
             #ifdef DEBUG
                    qDebug() << errStr;
             #endif
+            tmuTempCycleReady = false;
             return false;
         }
 
@@ -211,22 +212,23 @@ bool TMUTempCycle::importTempProf(QString fname)
             #ifdef DEBUG
                    qDebug() << errStr;
             #endif
+            tmuTempCycleReady = false;
             return false;
         }
     }
 
     file.close();
+    tmuTempCycleReady = true;
     return true;
 }
 
 bool TMUTempCycle::importTempProf()
 {
-    importTempProf(profileFileName);
+    return importTempProf(profileFileName);
 }
 
 bool TMUTempCycle::exportTempProf(QString fname)
 {
-    fname = fname.prepend(CONFIG_FILE_PREFIX);
     fname = fname.contains(".xml") ? fname : fname.append(".xml");
 
     QFile file(fname);

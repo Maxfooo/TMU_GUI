@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStringList>
 #include <QInputDialog>
+#include <QApplication>
 #include "tmu.h"
 #include "hxusbcomm.h"
 #include "hx_commstd.h"
@@ -13,8 +14,6 @@
 #include "tmutempcycle.h"
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
-
-extern QString CONFIG_FILE_PREFIX;
 
 typedef enum CommState {
     COMM_IDLE,
@@ -216,6 +215,7 @@ private:
 
     SaveMyUI* saveMyUI;
 
+    QString CONFIG_FILE_PREFIX = QCoreApplication::applicationDirPath().replace("build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/debug", "");
     QString mySettings = "mySettings.xml";
     QString CONFIG_FILE_NAMES_FILE_NAME = "ConfigFileNames.txt";
     QString TEMP_CYCLE_PROFILE_FILE_NAME = "TempCycleProfiles.txt";

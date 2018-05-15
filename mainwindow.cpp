@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -32,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     #ifdef DEBUG
         qDebug() << "Application File Path: " << CONFIG_FILE_PREFIX;
+        qDebug() << "Testing: " << QCoreApplication::applicationDirPath();
     #endif
 
     /****** INIT FILE NAMES ******/
@@ -76,7 +79,7 @@ void MainWindow::initTMUDaemons()
     for (uchar i = 0; i < NUM_OF_TMUS; i++)
     {
         tmuDaemon[i] = new TMUDaemon(i, tmu[i]);
-        connect(tmuDaemon[i], SIGNAL(rxTemperature(uchar id)), this, SLOT(rdRegSlot(uchar id)));
+        connect(tmuDaemon[i], SIGNAL(rxTemperature(uchar)), this, SLOT(rdRegSlot(uchar)));
     }
 }
 
@@ -85,7 +88,7 @@ void MainWindow::initTempCycleTMUs()
     for (uchar i = 0; i < NUM_OF_TMUS; i++)
     {
         tmuTempCycle[i] = new TMUTempCycle(i, tmu[i]);
-        connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar id)), this, SLOT(wrRegSlot(uchar id)));
+        connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar)), this, SLOT(wrRegSlot(uchar)));
     }
 }
 
@@ -1277,6 +1280,8 @@ void MainWindow::initTempCycleTab()
     ui->lineEdit_3->setValidator(floatValidator);
     ui->lineEdit_4->setValidator(floatValidator);
     ui->lineEdit_5->setValidator(floatValidator);
+
+    loadTempCycleCB();
 }
 
 
@@ -1374,6 +1379,7 @@ void MainWindow::loadTempCycleCB()
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         #ifdef DEBUG
+            qDebug() << "Failed to load temp cycle Combo Box";
             qDebug() << "Unable to open temp cycle profile file";
         #endif
         return;
@@ -1384,6 +1390,13 @@ void MainWindow::loadTempCycleCB()
     if (!temp.isEmpty())
     {
         QStringList tempCycleProfileNames = temp.split(CONFIG_FILE_NAMES_DELIMETER);
+        for (auto& f: tempCycleProfileNames)
+        {
+            if (f.contains(".xml"))
+            {
+                f = f.replace(".xml", "");
+            }
+        }
         ui->comboBox_6->addItems(tempCycleProfileNames);
     }
     file.close();
@@ -1398,6 +1411,9 @@ void MainWindow::loadTempCycleTab(TMUTempCycle* ttc)
     QTableWidget* pTable = ui->tableWidget;
     if (ttc->isSawtooth())
     {
+        #ifdef DEBUG
+            qDebug() << "Loading sawtooth";
+        #endif
         on_radioButton_5_clicked();
         ttc->getTempSpan(tStart, tStop);
         ui->lineEdit_3->setText(QString::number(tStart));
@@ -1406,6 +1422,10 @@ void MainWindow::loadTempCycleTab(TMUTempCycle* ttc)
     }
     else
     {
+        #ifdef DEBUG
+            qDebug() << "Loading piecewise";
+        #endif
+        on_radioButton_6_clicked();
         ttdVect = tmuTempCycle[PRIMARY_TMU_ID]->getPiecewise();
         for (int i = 0; i < ttdVect.size(); i++)
         {
@@ -1419,13 +1439,13 @@ QString MainWindow::saveTempCycleProfileFileName(QString fname)
 {
     fname = fname.contains(".xml") ? fname : fname + ".xml";
 
-    QString fileName = CONFIG_FILE_NAMES_FILE_NAME;
+    QString fileName = TEMP_CYCLE_PROFILE_FILE_NAME;
     QFile file(fileName);
     QString temp = "";
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         #ifdef DEBUG
-            qDebug() << "Unable to open config-file file";
+            qDebug() << "Unable to open temp cycle profile file";
         #endif
         return temp;
     }
@@ -1442,9 +1462,7 @@ QString MainWindow::saveTempCycleProfileFileName(QString fname)
     in << temp;
     file.close();
 
-    loadTempCycleCB();
-
-    return fname.prepend(CONFIG_FILE_PREFIX);
+    return fname;
 
 }
 
@@ -1453,6 +1471,7 @@ void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile Dr
     QString saveKey = ui->comboBox_6->itemText(ui->comboBox_6->currentIndex()).append(".xml").prepend(CONFIG_FILE_PREFIX);
 
     tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+    tmuTempCycle[PRIMARY_TMU_ID]->loadTempProfile();
     loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
 }
 
@@ -1466,6 +1485,7 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
         {
             saveKey = saveTempCycleProfileFileName(saveKey);
             tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+            loadTempCycleCB();
         }
         else
         {
