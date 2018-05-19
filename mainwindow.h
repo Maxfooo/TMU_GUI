@@ -277,6 +277,7 @@ private:
     void exportHex();
     void importHex();
     void updateGeneralTab();
+    void setupTMUTempCycle(TMUTempCycle* ttc);
 
     void saveConfigFileName(QString fname);
     void removeConfigFileName(QString fname);

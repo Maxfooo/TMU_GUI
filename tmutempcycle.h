@@ -13,6 +13,7 @@
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
 #include "tmu.h"
+#include "savemyui.h"
 
 
 const QString GENERIC_PROFILE_FILE_NAME = "Temperature_Profile_0.xml";
@@ -29,11 +30,11 @@ class TMUTempCycle : public QObject
 {
     Q_OBJECT
 public:
-    TMUTempCycle(uchar id, TMU *tmu);
+    TMUTempCycle(uchar id, TMU *tmu, SaveMyUI *saveMyUI);
     ~TMUTempCycle();
 
     QString getErrorStr() { return errStr;}
-    void setFileName(QString fname) {profileFileName = fname;}
+    void setFileName(QString fname);
     uchar getID() {return this->id;}
 
     void debugExport();
@@ -57,6 +58,11 @@ public:
     void resume();
     void stop();
 
+    void importProfile(QString fname);
+    void importProfile();
+    void exportProfile(QString fname);
+    void exportProfile();
+
     bool loadTempProfile() { return importTempProf();}
     bool loadTempProfile(QString fname) { return importTempProf(fname);}
 
@@ -67,6 +73,8 @@ public slots:
     void updateHeatLatch();
 
 private:
+    SaveMyUI* saveMyUI;
+
     TMU* tmu;
     uchar id;
     QTimer* checkTimer;

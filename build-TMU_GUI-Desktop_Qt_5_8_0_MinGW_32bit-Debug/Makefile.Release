@@ -17,7 +17,7 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -std=gnu++11 -frtti -Wall -
 INCPATH       = -I..\..\TMU_GUI -I. -I..\..\TMU_GUI -IC:\Qt\5.8\mingw53_32\include -IC:\Qt\5.8\mingw53_32\include\QtWidgets -IC:\Qt\5.8\mingw53_32\include\QtGui -IC:\Qt\5.8\mingw53_32\include\QtANGLE -IC:\Qt\5.8\mingw53_32\include\QtSerialPort -IC:\Qt\5.8\mingw53_32\include\QtXml -IC:\Qt\5.8\mingw53_32\include\QtCore -Irelease -I. -IC:\Qt\5.8\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LC:\Qt\5.8\mingw53_32\lib C:\Qt\5.8\mingw53_32\lib\libqtmain.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Users\MaxRuiz\Desktop\Work\AZM_Hexius\Hexius\TMU_GUI\ftd2xx.lib C:\Qt\5.8\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.8\mingw53_32\lib\libQt5Gui.a C:\Qt\5.8\mingw53_32\lib\libQt5SerialPort.a C:\Qt\5.8\mingw53_32\lib\libQt5Xml.a C:\Qt\5.8\mingw53_32\lib\libQt5Core.a 
+LIBS        =        -lmingw32 -LC:\Qt\5.8\mingw53_32\lib C:\Qt\5.8\mingw53_32\lib\libqtmain.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Users\maxr\Desktop\TMU\SOFTWARE\GUI\TMU_GUI\ftd2xx.lib C:\Qt\5.8\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.8\mingw53_32\lib\libQt5Gui.a C:\Qt\5.8\mingw53_32\lib\libQt5SerialPort.a C:\Qt\5.8\mingw53_32\lib\libQt5Xml.a C:\Qt\5.8\mingw53_32\lib\libQt5Core.a 
 QMAKE         = C:\Qt\5.8\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -81,10 +81,8 @@ OBJECTS       = release/main.o \
 
 DIST          = TO_DO.txt \
 		SaveMyUI_README.txt \
-		build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug/temp_profile_0.xml \
-		temp_profile_0.xml \
 		TempCycleProfiles.txt \
-		temp_profile_1.xml ..\mainwindow.h \
+		ConfigFileNames.txt ..\mainwindow.h \
 		..\hx_commstd.h \
 		..\hxusbcomm.h \
 		..\hxusbcommworker.h \
@@ -460,7 +458,7 @@ release/moc_mainwindow.cpp: C:/Qt/5.8/mingw53_32/include/QtWidgets/QMainWindow \
 		../mainwindow.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\mainwindow.h -o release\moc_mainwindow.cpp
 
 release/moc_hxusbcomm.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QObject \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qobject.h \
@@ -605,7 +603,7 @@ release/moc_hxusbcomm.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QObject \
 		../hxusbcomm.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\hxusbcomm.h -o release\moc_hxusbcomm.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\hxusbcomm.h -o release\moc_hxusbcomm.cpp
 
 release/moc_hxusbcommworker.cpp: ../hxguiproperties.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QObject \
@@ -749,7 +747,7 @@ release/moc_hxusbcommworker.cpp: ../hxguiproperties.h \
 		../hxusbcommworker.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\hxusbcommworker.h -o release\moc_hxusbcommworker.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\hxusbcommworker.h -o release\moc_hxusbcommworker.cpp
 
 release/moc_tmudaemon.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QTimer \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qtimer.h \
@@ -900,7 +898,7 @@ release/moc_tmudaemon.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QTimer \
 		../tmudaemon.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\tmudaemon.h -o release\moc_tmudaemon.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\tmudaemon.h -o release\moc_tmudaemon.cpp
 
 release/moc_tmutempcycle.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qdebug.h \
@@ -1159,10 +1157,35 @@ release/moc_tmutempcycle.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		../hxutils.h \
 		../hxusbcommworker.h \
 		../hxguiproperties.h \
+		../savemyui.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QRadioButton \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qradiobutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QCheckBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QLineEdit \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QFileDialog \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qfiledialog.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QWidget \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QTableWidget \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qcombobox.h \
 		../tmutempcycle.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\tmutempcycle.h -o release\moc_tmutempcycle.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\tmutempcycle.h -o release\moc_tmutempcycle.cpp
 
 release/moc_processrunningle.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qdebug.h \
@@ -1285,7 +1308,7 @@ release/moc_processrunningle.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		../processrunningle.h \
 		release/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
-	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Users/MaxRuiz/Desktop/Work/AZM_Hexius/Hexius/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\processrunningle.h -o release\moc_processrunningle.cpp
+	C:\Qt\5.8\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.8/mingw53_32/mkspecs/win32-g++ -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI -IC:/Qt/5.8/mingw53_32/include -IC:/Qt/5.8/mingw53_32/include/QtWidgets -IC:/Qt/5.8/mingw53_32/include/QtGui -IC:/Qt/5.8/mingw53_32/include/QtANGLE -IC:/Qt/5.8/mingw53_32/include/QtSerialPort -IC:/Qt/5.8/mingw53_32/include/QtXml -IC:/Qt/5.8/mingw53_32/include/QtCore -I. -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\processrunningle.h -o release\moc_processrunningle.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -3298,7 +3321,32 @@ release/tmutempcycle.o: ../tmutempcycle.cpp ../tmutempcycle.h \
 		../hx_commstd.h \
 		../hxutils.h \
 		../hxusbcommworker.h \
-		../hxguiproperties.h
+		../hxguiproperties.h \
+		../savemyui.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QRadioButton \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qradiobutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QCheckBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QLineEdit \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextcursor.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextformat.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qpen.h \
+		C:/Qt/5.8/mingw53_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QLabel \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qlabel.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QFileDialog \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qfiledialog.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QWidget \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMainWindow \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmainwindow.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QTableWidget \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/5.8/mingw53_32/include/QtWidgets/qcombobox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\tmutempcycle.o ..\tmutempcycle.cpp
 
 release/processrunningle.o: ../processrunningle.cpp ../processrunningle.h \

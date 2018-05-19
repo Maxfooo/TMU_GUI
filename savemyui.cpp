@@ -44,6 +44,7 @@ void SaveMyUI::saveToXML(const QString& fileName)
     QString errStr = "Could not open XML file for writing.";
     QString val;
     QFile file(fileName);
+    qDebug() << "SaveMyUI: Opened file for saving.";
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
         msgBox.setText(errStr);
@@ -65,7 +66,7 @@ void SaveMyUI::saveToXML(const QString& fileName)
     QDomText tiText; // table item text
 
 
-
+    qDebug() << "SaveMyUI: Starting RadioButton Extraction";
     /***************************/
     // QRadioButtons
     /***************************/
@@ -81,9 +82,12 @@ void SaveMyUI::saveToXML(const QString& fileName)
         val1 = doc.createTextNode(val);
         key.appendChild(val1);
     }
+    qDebug() << "SaveMyUI: Finished RadioButton Extraction";
 
+
+    qDebug() << "SaveMyUI: Starting CheckBox Extraction";
     /***************************/
-    // QRadioButtons
+    // QCheckBox
     /***************************/
     subroot = doc.createElement(Q_CHK_BOX);
     root.appendChild(subroot);
@@ -96,7 +100,10 @@ void SaveMyUI::saveToXML(const QString& fileName)
         val1 = doc.createTextNode(val);
         key.appendChild(val1);
     }
+    qDebug() << "SaveMyUI: Finished CheckBox Extraction";
 
+
+    qDebug() << "SaveMyUI: Starting LineEdit Extraction";
     /***************************/
     // QLineEdit
     /***************************/
@@ -112,7 +119,10 @@ void SaveMyUI::saveToXML(const QString& fileName)
         val1 = doc.createTextNode(le->text());
         key.appendChild(val1);
     }
+    qDebug() << "SaveMyUI: Finished LineEdit Extraction";
 
+
+    qDebug() << "SaveMyUI: Starting Label Extraction";
     /***************************/
     // QLabel
     /***************************/
@@ -126,7 +136,10 @@ void SaveMyUI::saveToXML(const QString& fileName)
         val1 = doc.createTextNode(l->text());
         key.appendChild(val1);
     }
+    qDebug() << "SaveMyUI: Finished Label Extraction";
 
+
+    qDebug() << "SaveMyUI: Starting TableWidget Extraction";
     /***************************/
     // QTableWidget
     /***************************/
@@ -161,7 +174,10 @@ void SaveMyUI::saveToXML(const QString& fileName)
             }
         }
     }
+    qDebug() << "SaveMyUI: Finished TableWidget Extraction";
 
+
+    qDebug() << "SaveMyUI: Starting ComboBox Extraction";
     /***************************/
     // QComboBox
     /***************************/
@@ -176,6 +192,7 @@ void SaveMyUI::saveToXML(const QString& fileName)
         val1 = doc.createTextNode(val);
         key.appendChild(val1);
     }
+    qDebug() << "SaveMyUI: Finished ComboBox Extraction";
 
     QTextStream output(&file);
     output << doc.toString();
