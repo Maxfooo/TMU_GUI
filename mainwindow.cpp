@@ -32,10 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     decValidator = new QRegExpValidator(QRegExp("^[0-9]+$"),this); // only allow integers
     floatValidator = new QRegExpValidator(QRegExp("^[0-9\\.]+$"),this); //only allow dec/float Values into validator
 
-    #ifdef DEBUG
-        qDebug() << "Application File Path: " << CONFIG_FILE_PREFIX;
-        qDebug() << "Testing: " << QCoreApplication::applicationDirPath();
-    #endif
+
 
     /****** INIT FILE NAMES ******/
     mySettings.prepend(CONFIG_FILE_PREFIX);
@@ -51,6 +48,12 @@ MainWindow::MainWindow(QWidget *parent) :
     /****** INIT MISC ******/
     procRunLE = new ProcessRunningLE(ui->lineEdit_26, procRunPeriod);
 
+    #ifdef DEBUG
+        qDebug() << "Working Path without edits: " << QCoreApplication::applicationDirPath();
+        qDebug() << "Application File Path: " << CONFIG_FILE_PREFIX;
+        qDebug() << "Config File Name File Path: " << CONFIG_FILE_NAMES_FILE_NAME;
+        qDebug() << "Temp Cycle Profile File Path: " << TEMP_CYCLE_PROFILE_FILE_NAME;
+    #endif
 
 }
 
@@ -87,7 +90,7 @@ void MainWindow::initTempCycleTMUs()
 {
     for (uchar i = 0; i < NUM_OF_TMUS; i++)
     {
-        tmuTempCycle[i] = new TMUTempCycle(i, tmu[i]);
+        tmuTempCycle[i] = new TMUTempCycle(i, tmu[i], saveMyUI);
         connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar)), this, SLOT(wrRegSlot(uchar)));
     }
 }
@@ -1468,11 +1471,11 @@ QString MainWindow::saveTempCycleProfileFileName(QString fname)
 
 void MainWindow::on_comboBox_6_currentIndexChanged(int index) // Temp Profile DropBox
 {
-    QString saveKey = ui->comboBox_6->itemText(ui->comboBox_6->currentIndex()).append(".xml").prepend(CONFIG_FILE_PREFIX);
+//    QString saveKey = ui->comboBox_6->itemText(ui->comboBox_6->currentIndex()).append(".xml").prepend(CONFIG_FILE_PREFIX);
 
-    tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
-    tmuTempCycle[PRIMARY_TMU_ID]->loadTempProfile();
-    loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
+//    tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+//    tmuTempCycle[PRIMARY_TMU_ID]->loadTempProfile();
+//    loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
 }
 
 void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
@@ -1484,8 +1487,12 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
         if(saveKey.size() < 41)
         {
             saveKey = saveTempCycleProfileFileName(saveKey);
-            tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+            saveKey.prepend(CONFIG_FILE_PREFIX);
+            qDebug() << "ONE";
+            tmuTempCycle[PRIMARY_TMU_ID]->exportProfile(saveKey);
+            qDebug() << "TWO";
             loadTempCycleCB();
+            qDebug() << "THREE";
         }
         else
         {
@@ -1494,6 +1501,11 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
         }
     }
 
+    setupTMUTempCycle(tmuTempCycle[PRIMARY_TMU_ID]);
+}
+
+void MainWindow::setupTMUTempCycle(TMUTempCycle* ttc)
+{
     // Setup and tmutempcycle
     bool status = false;
     double tStart = ui->lineEdit_3->text().toDouble(&status);
@@ -1506,7 +1518,7 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
     if (ui->radioButton_5->isChecked())
     {
         // Sawtooth
-        tmuTempCycle[PRIMARY_TMU_ID]->setSawtooth(tStart, tStop, period);
+        ttc->setSawtooth(tStart, tStop, period);
     }
     else
     {
@@ -1550,13 +1562,19 @@ void MainWindow::on_pushButton_18_clicked() // Save temp profile PB
 
             ttdVect.push_back(ttData);
         }
-        tmuTempCycle[PRIMARY_TMU_ID]->setPiecewise(ttdVect);
+        ttc->setPiecewise(ttdVect);
     }
 }
 
 void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
 {
+    QString saveKey = ui->comboBox_6->itemText(ui->comboBox_6->currentIndex()).append(".xml").prepend(CONFIG_FILE_PREFIX);
 
+    tmuTempCycle[PRIMARY_TMU_ID]->setFileName(saveKey);
+    //tmuTempCycle[PRIMARY_TMU_ID]->loadTempProfile();
+    tmuTempCycle[PRIMARY_TMU_ID]->importProfile();
+    setupTMUTempCycle(tmuTempCycle[PRIMARY_TMU_ID]);
+    //loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
 }
 
 void MainWindow::on_pushButton_22_clicked() // Overwrite Profile PB

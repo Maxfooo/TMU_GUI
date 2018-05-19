@@ -1,6 +1,6 @@
 #include "tmutempcycle.h"
 
-TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu)
+TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, SaveMyUI *saveMyUI)
 {
     this->tmu = tmu;
     this->id = id;
@@ -8,6 +8,8 @@ TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu)
     checkTimer->setInterval(TEMP_CYCLE_CHECK_PERIOD);
     checkTimer->setTimerType(Qt::CoarseTimer);
     connect(checkTimer, SIGNAL(timeout()), this, SLOT(updateHeatLatch()));
+
+    this->saveMyUI = saveMyUI;
 }
 
 TMUTempCycle::~TMUTempCycle()
@@ -16,6 +18,12 @@ TMUTempCycle::~TMUTempCycle()
     {
         checkTimer->stop();
     }
+}
+
+void TMUTempCycle::setFileName(QString fname)
+{
+    profileFileName = fname;
+    //saveMyUI->setFileName(fname);
 }
 
 void TMUTempCycle::start()
@@ -159,6 +167,30 @@ void TMUTempCycle::getTempSpan(double& tStart, double& tStop)
 {
     tStart = minTemp().temp;
     tStop = maxTemp().temp;
+}
+
+void TMUTempCycle::importProfile(QString fname)
+{
+    profileFileName = fname;
+    //saveMyUI->setFileName(fname);
+    saveMyUI->loadFromXML(profileFileName);
+}
+
+void TMUTempCycle::importProfile()
+{
+    importProfile(profileFileName);
+}
+
+void TMUTempCycle::exportProfile(QString fname)
+{
+    profileFileName = fname;
+    //saveMyUI->setFileName(fname);
+    saveMyUI->saveToXML(profileFileName);
+}
+
+void TMUTempCycle::exportProfile()
+{
+    exportProfile(profileFileName);
 }
 
 bool TMUTempCycle::importTempProf(QString fname)
