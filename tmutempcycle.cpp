@@ -1,6 +1,6 @@
 #include "tmutempcycle.h"
 
-TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, SaveMyUI *saveMyUI)
+TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, QMainWindow *parent)
 {
     this->tmu = tmu;
     this->id = id;
@@ -9,7 +9,7 @@ TMUTempCycle::TMUTempCycle(uchar id, TMU* tmu, SaveMyUI *saveMyUI)
     checkTimer->setTimerType(Qt::CoarseTimer);
     connect(checkTimer, SIGNAL(timeout()), this, SLOT(updateHeatLatch()));
 
-    this->saveMyUI = saveMyUI;
+    saveMyUI = new SaveMyUI(parent, profileFileName);
 }
 
 TMUTempCycle::~TMUTempCycle()
@@ -65,7 +65,7 @@ void TMUTempCycle::updateHeatLatch()
     this->start();
 }
 
-bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
+void TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
 {
     // Build a piecewise set with evenly spaced temperatures to occupy the period
     // half up, half down
@@ -91,11 +91,12 @@ bool TMUTempCycle::setSawtooth(double tStart, double tStop, double period)
         tempProfile[i].time = timeStep;
     }
     piecewiseCount = PIECEWISE_STEP_COUNT;
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 
 }
 
-bool TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
+void TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int timeSize)
 {
     cycleType = SET_PIECEWISE;
     piecewiseCount = static_cast<unsigned int>(std::min(std::min(tempSize, timeSize), PIECEWISE_STEP_COUNT));
@@ -104,10 +105,11 @@ bool TMUTempCycle::setPiecewise(double* temp, int tempSize, double* time, int ti
         tempProfile[i].temp = temp[i];
         tempProfile[i].time = time[i];
     }
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 }
 
-bool TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
+void TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
 {
     cycleType = SET_PIECEWISE;
     piecewiseCount = static_cast<unsigned int>(ttdataSize, PIECEWISE_STEP_COUNT);
@@ -115,10 +117,11 @@ bool TMUTempCycle::setPiecewise(TTData* ttdata, int ttdataSize)
     {
         tempProfile[i] = ttdata[i];
     }
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 }
 
-bool TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
+void TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vector<double>& time)
 {
     cycleType = SET_PIECEWISE;
     piecewiseCount = static_cast<unsigned int>(std::min(std::min(temp.size(), time.size()), static_cast<const unsigned int>(PIECEWISE_STEP_COUNT)));
@@ -127,10 +130,11 @@ bool TMUTempCycle::setPiecewise(const std::vector<double>& temp, const std::vect
         tempProfile[i].temp = temp.at(i);
         tempProfile[i].time = time.at(i);
     }
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 }
 
-bool TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
+void TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
 {
     cycleType = SET_PIECEWISE;
     piecewiseCount = static_cast<unsigned int>(std::min(static_cast<int>(ttdata.size()), PIECEWISE_STEP_COUNT));
@@ -138,10 +142,11 @@ bool TMUTempCycle::setPiecewise(const std::vector<TTData>& ttdata)
     {
         tempProfile[i] = ttdata.at(i);
     }
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 }
 
-bool TMUTempCycle::setPiecewise(const std::vector<TTData*>& ttdata)
+void TMUTempCycle::setPiecewise(const std::vector<TTData*>& ttdata)
 {
     cycleType = SET_PIECEWISE;
     piecewiseCount = static_cast<unsigned int>(std::min(static_cast<int>(ttdata.size()), PIECEWISE_STEP_COUNT));
@@ -150,7 +155,8 @@ bool TMUTempCycle::setPiecewise(const std::vector<TTData*>& ttdata)
         tempProfile[i].temp = ttdata.at(i)->temp;
         tempProfile[i].time = ttdata.at(i)->time;
     }
-    return this->exportTempProf(profileFileName);
+    //return this->exportTempProf(profileFileName);
+    this->exportProfile();
 }
 
 std::vector<TTData> TMUTempCycle::getPiecewise()

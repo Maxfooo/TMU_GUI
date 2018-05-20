@@ -90,7 +90,7 @@ void MainWindow::initTempCycleTMUs()
 {
     for (uchar i = 0; i < NUM_OF_TMUS; i++)
     {
-        tmuTempCycle[i] = new TMUTempCycle(i, tmu[i], saveMyUI);
+        tmuTempCycle[i] = new TMUTempCycle(i, tmu[i], this);
         connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar)), this, SLOT(wrRegSlot(uchar)));
     }
 }
@@ -1575,6 +1575,19 @@ void MainWindow::on_pushButton_19_clicked() // revert to temp profile PB
     tmuTempCycle[PRIMARY_TMU_ID]->importProfile();
     setupTMUTempCycle(tmuTempCycle[PRIMARY_TMU_ID]);
     //loadTempCycleTab(tmuTempCycle[PRIMARY_TMU_ID]);
+
+    if (ui->radioButton_5->isChecked())
+    {
+        on_radioButton_5_clicked();
+        ui->tableWidget->clearContents();
+    }
+    else
+    {
+        on_radioButton_6_clicked();
+        ui->lineEdit_3->clear();
+        ui->lineEdit_4->clear();
+        ui->lineEdit_5->clear();
+    }
 }
 
 void MainWindow::on_pushButton_22_clicked() // Overwrite Profile PB

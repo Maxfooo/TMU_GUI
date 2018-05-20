@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+ <QRadioButton>
+  <radioButton_8>0</radioButton_8>
+  <radioButton_9>1</radioButton_9>
+  <radioButton_3>1</radioButton_3>
+  <radioButton_4>0</radioButton_4>
+  <radioButton_10>0</radioButton_10>
+  <radioButton>1</radioButton>
+  <radioButton_2>0</radioButton_2>
+  <radioButton_5>1</radioButton_5>
+  <radioButton_6>0</radioButton_6>
+ </QRadioButton>
+ <QCheckBox/>
+ <QLineEdit>
+  <lineEdit_18>0188</lineEdit_18>
+  <lineEdit_17>0000</lineEdit_17>
+  <lineEdit_21>0018</lineEdit_21>
+  <lineEdit_20>000f</lineEdit_20>
+  <lineEdit_19>8000</lineEdit_19>
+  <lineEdit_22></lineEdit_22>
+  <lineEdit_12></lineEdit_12>
+  <lineEdit_11></lineEdit_11>
+  <lineEdit_13></lineEdit_13>
+  <lineEdit_15>100</lineEdit_15>
+  <lineEdit_16>4250</lineEdit_16>
+  <lineEdit></lineEdit>
+  <lineEdit_2></lineEdit_2>
+  <lineEdit_6>0</lineEdit_6>
+  <lineEdit_10>0</lineEdit_10>
+  <lineEdit_9></lineEdit_9>
+  <lineEdit_14></lineEdit_14>
+  <lineEdit_7></lineEdit_7>
+  <lineEdit_8></lineEdit_8>
+  <lineEdit_23></lineEdit_23>
+  <lineEdit_24></lineEdit_24>
+  <lineEdit_25></lineEdit_25>
+  <lineEdit_3>25</lineEdit_3>
+  <lineEdit_4>125</lineEdit_4>
+  <lineEdit_5>60</lineEdit_5>
+  <lineEdit_26></lineEdit_26>
+ </QLineEdit>
+ <QLabel>
+  <label_48>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-size:11pt; font-weight:600;">HEX Configurations&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_48>
+  <label_46>OVEN_CTLR</label_46>
+  <label_45>HEAT</label_45>
+  <label_47>ANALOG_0</label_47>
+  <label_44>BIAS</label_44>
+  <label_43>CMOS_OUT</label_43>
+  <label_49>Notes</label_49>
+  <label_50>Current Configuration</label_50>
+  <label_11>Channel Select</label_11>
+  <label_13>ADC Code</label_13>
+  <label_12>Volts</label_12>
+  <label_14>Hex</label_14>
+  <label_36>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Multiplexor&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_36>
+  <label_35>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Reference Voltage&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_35>
+  <label_2>Gain Resistor</label_2>
+  <label_23>Enter Thermistor&#xd;&#xd;&#xd;&#xd;&#xd;
+Parameters&#xd;&#xd;&#xd;&#xd;&#xd;
+</label_23>
+  <label_24>Select Control&#xd;&#xd;&#xd;&#xd;&#xd;
+Resistor Values</label_24>
+  <label_20>Res.(kOhms) @ 25C</label_20>
+  <label_21>Thermistor Beta</label_21>
+  <label>Range Resistor</label>
+  <label_22>Enter Desired&#xd;&#xd;&#xd;&#xd;&#xd;
+Temperature&#xd;&#xd;&#xd;&#xd;&#xd;
+(25C to 125C)</label_22>
+  <label_31>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-size:11pt; font-weight:600; color:#0f4b96;">Heater Options&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_31>
+  <label_15>Internal Heater Feedback&#xd;&#xd;&#xd;&#xd;&#xd;
+Voltage (INTFB)</label_15>
+  <label_10>Current Limit (0mA to 344mA)</label_10>
+  <label_5>mA</label_5>
+  <label_8>V</label_8>
+  <label_32>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Internal Heater&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_32>
+  <label_33>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">External Heater&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_33>
+  <label_6>Current Limit (0mA to 1450mA)</label_6>
+  <label_9>Number of Heater Legs</label_9>
+  <label_7>Value of Heater Resistor</label_7>
+  <label_18>External Heater Feedback&#xd;&#xd;&#xd;&#xd;&#xd;
+Voltage (EXTFB)</label_18>
+  <label_16>mA</label_16>
+  <label_17>Ohms</label_17>
+  <label_19>V</label_19>
+  <label_34>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Set Temperature&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_34>
+  <label_52>Ambient Resistance</label_52>
+  <label_53>kOhms</label_53>
+  <label_54>Material Resistance</label_54>
+  <label_55>Ambient Capacitance</label_55>
+  <label_56>Ohms</label_56>
+  <label_57>mF</label_57>
+  <label_51>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Thermal Parameters&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_51>
+  <label_41>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-size:11pt; font-weight:600; color:#0f4b96;">Piecewise Sweep&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_41>
+  <label_4>Sawtooth Period</label_4>
+  <label_61>Temp Range</label_61>
+  <label_58>C</label_58>
+  <label_3>To</label_3>
+  <label_59>C</label_59>
+  <label_62>Seconds</label_62>
+  <label_60>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-weight:600; font-style:italic;">Save Profile&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_60>
+  <label_40>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;span style=" font-size:11pt; font-weight:600; color:#0f4b96;">Sawtooth Sweep&lt;/span>&lt;/p>&lt;/body>&lt;/html></label_40>
+  <label_29>OTP Programmed:</label_29>
+  <label_27>TMU Detected:</label_27>
+  <label_26>Not Connected</label_26>
+  <label_28>No</label_28>
+  <label_30>No</label_30>
+  <label_25>Programmer:</label_25>
+  <label_37>Part Number:</label_37>
+  <label_38>PN</label_38>
+  <label_39>&lt;html>&lt;head/>&lt;body>&lt;p>&lt;img src=":/images/Hexius_logo_resize.png"/>&lt;/p>&lt;/body>&lt;/html></label_39>
+  <label_42>Rev 1.0</label_42>
+ </QLabel>
+ <QTableWidget>
+  <tableWidget_2>
+   <r0_c0>ANALOG_0</r0_c0>
+   <r1_c0>OVEN_CTLR</r1_c0>
+   <r2_c0>HEAT</r2_c0>
+   <r3_c0>BIAS</r3_c0>
+   <r4_c0>CMOS_OUT</r4_c0>
+   <r0_c1>0</r0_c1>
+   <r1_c1>188</r1_c1>
+   <r2_c1>8000</r2_c1>
+   <r3_c1>f</r3_c1>
+   <r4_c1>18</r4_c1>
+  </tableWidget_2>
+  <tableWidget>
+   <r0_c0>25</r0_c0>
+   <r1_c0>35</r1_c0>
+   <r2_c0>50</r2_c0>
+   <r3_c0>25</r3_c0>
+   <r4_c0>60</r4_c0>
+   <r5_c0>79</r5_c0>
+   <r6_c0>100</r6_c0>
+   <r7_c0>103</r7_c0>
+   <r8_c0>66</r8_c0>
+   <r9_c0>120</r9_c0>
+   <r0_c1>10</r0_c1>
+   <r1_c1>10</r1_c1>
+   <r2_c1>10</r2_c1>
+   <r3_c1>10</r3_c1>
+   <r4_c1>10</r4_c1>
+   <r5_c1>10</r5_c1>
+   <r6_c1>10</r6_c1>
+   <r7_c1>10</r7_c1>
+   <r8_c1>10</r8_c1>
+   <r9_c1>10</r9_c1>
+  </tableWidget>
+ </QTableWidget>
+ <QComboBox>
+  <comboBox_4>-1</comboBox_4>
+  <comboBox_3>0</comboBox_3>
+  <comboBox>0</comboBox>
+  <comboBox_2>0</comboBox_2>
+  <comboBox_6>0</comboBox_6>
+ </QComboBox>
+</ROOT>

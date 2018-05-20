@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QMainWindow>
 #include <vector>
 #include "tmu_std.h"
 #include "tmu_gui_properties.h"
@@ -30,7 +31,7 @@ class TMUTempCycle : public QObject
 {
     Q_OBJECT
 public:
-    TMUTempCycle(uchar id, TMU *tmu, SaveMyUI *saveMyUI);
+    TMUTempCycle(uchar id, TMU *tmu, QMainWindow* parent);
     ~TMUTempCycle();
 
     QString getErrorStr() { return errStr;}
@@ -40,12 +41,12 @@ public:
     void debugExport();
     void debugExportImport();
 
-    bool setSawtooth(double tStart, double tStop, double period);
-    bool setPiecewise(double* temp, int tempSize, double* time, int timeSize);
-    bool setPiecewise(TTData* ttdata, int ttdataSize);
-    bool setPiecewise(const std::vector<double>& temp, const std::vector<double>& time);
-    bool setPiecewise(const std::vector<TTData>& ttdata);
-    bool setPiecewise(const std::vector<TTData*>& ttdata);
+    void setSawtooth(double tStart, double tStop, double period);
+    void setPiecewise(double* temp, int tempSize, double* time, int timeSize);
+    void setPiecewise(TTData* ttdata, int ttdataSize);
+    void setPiecewise(const std::vector<double>& temp, const std::vector<double>& time);
+    void setPiecewise(const std::vector<TTData>& ttdata);
+    void setPiecewise(const std::vector<TTData*>& ttdata);
     std::vector<TTData> getPiecewise();
     void setCycleType(bool isSawtooth);
     void setPeriod(unsigned int period) {this->period = period;}
