@@ -55,7 +55,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -2041,13 +2041,13 @@ font-style:italic;
     </widget>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
-      <string>Page</string>
+      <string>Debug</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>130</y>
+        <x>440</x>
+        <y>30</y>
         <width>231</width>
         <height>201</height>
        </rect>
@@ -2062,6 +2062,19 @@ font-style:italic;
         <string>Value</string>
        </property>
       </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_24">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Read Analog 0 Latch</string>
+      </property>
      </widget>
     </widget>
    </widget>
@@ -2222,15 +2235,22 @@ font-style:italic;
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionRefresh_Micro"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuDebug_2">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="actionRefresh_uC"/>
+    <addaction name="actionRead_Analog0_Latch"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuDebug_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -2241,19 +2261,14 @@ font-style:italic;
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSave_UI_State">
+  <action name="actionRefresh_uC">
    <property name="text">
-    <string>Save UI State</string>
+    <string>Refresh uC</string>
    </property>
   </action>
-  <action name="actionLoad_UI_State">
+  <action name="actionRead_Analog0_Latch">
    <property name="text">
-    <string>Load UI State</string>
-   </property>
-  </action>
-  <action name="actionRefresh_Micro">
-   <property name="text">
-    <string>Refresh Micro</string>
+    <string>Read Analog0 Latch</string>
    </property>
   </action>
  </widget>

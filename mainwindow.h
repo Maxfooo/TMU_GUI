@@ -174,8 +174,6 @@ private slots:
 
     void updateDataInfo();
 
-    void on_actionRefresh_Micro_triggered();
-
     void on_lineEdit_3_editingFinished();
 
     void on_lineEdit_4_editingFinished();
@@ -199,6 +197,13 @@ private slots:
     void on_pushButton_22_clicked();
 
     void on_pushButton_23_clicked();
+
+    void on_actionRefresh_uC_triggered();
+
+    void on_actionRead_Analog0_Latch_triggered();
+
+
+    void on_pushButton_24_clicked();
 
 public slots:
     void updateDirectGUI();

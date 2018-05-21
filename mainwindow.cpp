@@ -322,15 +322,14 @@ void MainWindow::detectTMUWrite(uchar id)
 {
     readbackID = id;
     setTMUChannel(id);
-
+    commState = COMM_DETECT_DUT_RD;
 #ifdef DEBUG
     uchar rxROM[5] = {CMD_RD_ROM, 0x01, 0x00, 1, 0};
     rxROM[4] = HxUtils::calcChecksum(rxROM, 4);
     handleI2CWrite(rxROM, 5, 3);
     // Works, returns 0x0B for address 0x0001, which is correct
 #else
-    commState = COMM_DETECT_DUT_RD;
-    handleI2CWrite(tmu->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
+    handleI2CWrite(tmu[PRIMARY_TMU_ID]->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
 #endif
 }
 
@@ -1715,11 +1714,29 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
 }
 
 //////////////////////////////////////
-// TOOL BAR ACTIONS
+// TOOL BAR ACTIONS AND DEBUG TAB
 //////////////////////////////////////
 
-void MainWindow::on_actionRefresh_Micro_triggered()
+
+void MainWindow::on_actionRefresh_uC_triggered()
 {
     refreshMicro();
 }
 
+
+void MainWindow::on_actionRead_Analog0_Latch_triggered()
+{
+    uchar rxAnalog0[SIZE_OF_RX_LATCH_PKT] = {CMD_READ_LATCH, ANALOG_0_NUM, 0};
+    rxAnalog0[2] = HxUtils::calcChecksum(rxAnalog0, SIZE_OF_RX_LATCH_PKT-1);
+    commState = COMM_IDLE;
+    handleI2CWrite(rxAnalog0, SIZE_OF_RX_LATCH_PKT, 3);
+}
+
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    uchar rxAnalog0[SIZE_OF_RX_LATCH_PKT] = {CMD_READ_LATCH, ANALOG_0_NUM, 0};
+    rxAnalog0[2] = HxUtils::calcChecksum(rxAnalog0, SIZE_OF_RX_LATCH_PKT-1);
+    commState = COMM_IDLE;
+    handleI2CWrite(rxAnalog0, SIZE_OF_RX_LATCH_PKT, 3);
+}

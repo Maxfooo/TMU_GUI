@@ -127,6 +127,11 @@ public:
     void generateTxPkt(TmuTxPkt& tmuPkt, uchar cmd);
     void generateRxPkt(TmuRxPkt& tmuPkt, uchar cmd);
 
+    // Debug
+#ifdef DEBUG
+    void getAnalog0Latch(latch* l) { l = &analog_0_latch;}
+#endif
+
 
 
 private:

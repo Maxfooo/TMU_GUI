@@ -39,9 +39,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionSave_UI_State;
-    QAction *actionLoad_UI_State;
-    QAction *actionRefresh_Micro;
+    QAction *actionRefresh_uC;
+    QAction *actionRead_Analog0_Latch;
     QWidget *centralWidget;
     QGroupBox *groupBox_10;
     QTextBrowser *textBrowser;
@@ -252,6 +251,7 @@ public:
     QWidget *tab_3;
     QWidget *tab_6;
     QTableWidget *tableWidget_2;
+    QPushButton *pushButton_24;
     QGroupBox *groupBox_6;
     QWidget *gridLayoutWidget_6;
     QGridLayout *gridLayout_6;
@@ -271,6 +271,7 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
+    QMenu *menuDebug_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -286,12 +287,10 @@ public:
         icon.addFile(QStringLiteral(":/images/hexius_semicondutor_favicon_transparent.ico"), QSize(), QIcon::Active, QIcon::On);
         icon.addFile(QStringLiteral(":/images/hexius_semicondutor_favicon_transparent.ico"), QSize(), QIcon::Selected, QIcon::On);
         MainWindow->setWindowIcon(icon);
-        actionSave_UI_State = new QAction(MainWindow);
-        actionSave_UI_State->setObjectName(QStringLiteral("actionSave_UI_State"));
-        actionLoad_UI_State = new QAction(MainWindow);
-        actionLoad_UI_State->setObjectName(QStringLiteral("actionLoad_UI_State"));
-        actionRefresh_Micro = new QAction(MainWindow);
-        actionRefresh_Micro->setObjectName(QStringLiteral("actionRefresh_Micro"));
+        actionRefresh_uC = new QAction(MainWindow);
+        actionRefresh_uC->setObjectName(QStringLiteral("actionRefresh_uC"));
+        actionRead_Analog0_Latch = new QAction(MainWindow);
+        actionRead_Analog0_Latch->setObjectName(QStringLiteral("actionRead_Analog0_Latch"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBox_10 = new QGroupBox(centralWidget);
@@ -1725,7 +1724,10 @@ public:
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem3);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        tableWidget_2->setGeometry(QRect(210, 130, 231, 201));
+        tableWidget_2->setGeometry(QRect(440, 30, 231, 201));
+        pushButton_24 = new QPushButton(tab_6);
+        pushButton_24->setObjectName(QStringLiteral("pushButton_24"));
+        pushButton_24->setGeometry(QRect(10, 10, 141, 51));
         tabWidget->addTab(tab_6, QString());
         groupBox_6 = new QGroupBox(centralWidget);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
@@ -1801,6 +1803,8 @@ public:
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
+        menuDebug_2 = new QMenu(menuBar);
+        menuDebug_2->setObjectName(QStringLiteral("menuDebug_2"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1811,11 +1815,13 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuHelp->menuAction());
-        menuFile->addAction(actionRefresh_Micro);
+        menuBar->addAction(menuDebug_2->menuAction());
+        menuDebug_2->addAction(actionRefresh_uC);
+        menuDebug_2->addAction(actionRead_Analog0_Latch);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1824,9 +1830,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "TM1100 Thermal Management Unit", Q_NULLPTR));
-        actionSave_UI_State->setText(QApplication::translate("MainWindow", "Save UI State", Q_NULLPTR));
-        actionLoad_UI_State->setText(QApplication::translate("MainWindow", "Load UI State", Q_NULLPTR));
-        actionRefresh_Micro->setText(QApplication::translate("MainWindow", "Refresh Micro", Q_NULLPTR));
+        actionRefresh_uC->setText(QApplication::translate("MainWindow", "Refresh uC", Q_NULLPTR));
+        actionRead_Analog0_Latch->setText(QApplication::translate("MainWindow", "Read Analog0 Latch", Q_NULLPTR));
         groupBox_10->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
         groupBox_3->setTitle(QString());
         label_2->setText(QApplication::translate("MainWindow", "Gain Resistor", Q_NULLPTR));
@@ -1955,7 +1960,8 @@ public:
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Name", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->horizontalHeaderItem(1);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Value", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Page", Q_NULLPTR));
+        pushButton_24->setText(QApplication::translate("MainWindow", "Read Analog 0 Latch", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Debug", Q_NULLPTR));
         groupBox_6->setTitle(QApplication::translate("MainWindow", "Device Info", Q_NULLPTR));
         label_29->setText(QApplication::translate("MainWindow", "OTP Programmed:", Q_NULLPTR));
         label_27->setText(QApplication::translate("MainWindow", "TMU Detected:", Q_NULLPTR));
@@ -1971,6 +1977,7 @@ public:
         label_42->setText(QApplication::translate("MainWindow", "Rev 1.0", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
+        menuDebug_2->setTitle(QApplication::translate("MainWindow", "Debug", Q_NULLPTR));
     } // retranslateUi
 
 };
