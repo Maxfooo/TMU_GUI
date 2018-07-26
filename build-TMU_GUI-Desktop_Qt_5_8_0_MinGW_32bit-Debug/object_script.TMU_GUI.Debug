@@ -10,6 +10,7 @@ INPUT(
 ./debug\tmudaemon.o
 ./debug\tmutempcycle.o
 ./debug\processrunningle.o
+./debug\tmuheatgradient.o
 ./debug\qrc_tmu_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_hxusbcomm.o

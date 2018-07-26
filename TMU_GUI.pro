@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     savemyui.cpp \
     tmudaemon.cpp \
     tmutempcycle.cpp \
-    processrunningle.cpp
+    processrunningle.cpp \
+    tmuheatgradient.cpp
 
 HEADERS  += mainwindow.h \
     hx_commstd.h \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
     savemyui.h \
     tmudaemon.h \
     tmutempcycle.h \
-    processrunningle.h
+    processrunningle.h \
+    tmuheatgradient.h
 
 win32:LIBS += "$$PWD/ftd2xx.lib"
 

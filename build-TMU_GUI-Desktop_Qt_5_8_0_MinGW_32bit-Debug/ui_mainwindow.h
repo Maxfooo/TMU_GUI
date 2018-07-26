@@ -26,6 +26,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -39,9 +40,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionSave_UI_State;
-    QAction *actionLoad_UI_State;
-    QAction *actionRefresh_Micro;
+    QAction *actionRefresh_uC;
+    QAction *actionRead_Analog0_Latch;
     QWidget *centralWidget;
     QGroupBox *groupBox_10;
     QTextBrowser *textBrowser;
@@ -250,8 +250,24 @@ public:
     QLabel *label_40;
     QPushButton *infoButton_SawtoothSweep;
     QWidget *tab_3;
+    QGroupBox *groupBox_14;
+    QWidget *gridLayoutWidget_10;
+    QGridLayout *gridLayout_11;
+    QLabel *label_64;
+    QLabel *label_63;
+    QLabel *label_65;
+    QSpinBox *spinBox;
+    QSpinBox *spinBox_2;
+    QSpinBox *spinBox_3;
+    QWidget *horizontalLayoutWidget_9;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_66;
+    QLineEdit *lineEdit_27;
+    QGroupBox *groupBox_15;
+    QComboBox *comboBox_5;
     QWidget *tab_6;
     QTableWidget *tableWidget_2;
+    QPushButton *pushButton_24;
     QGroupBox *groupBox_6;
     QWidget *gridLayoutWidget_6;
     QGridLayout *gridLayout_6;
@@ -271,6 +287,7 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
+    QMenu *menuDebug_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -286,12 +303,10 @@ public:
         icon.addFile(QStringLiteral(":/images/hexius_semicondutor_favicon_transparent.ico"), QSize(), QIcon::Active, QIcon::On);
         icon.addFile(QStringLiteral(":/images/hexius_semicondutor_favicon_transparent.ico"), QSize(), QIcon::Selected, QIcon::On);
         MainWindow->setWindowIcon(icon);
-        actionSave_UI_State = new QAction(MainWindow);
-        actionSave_UI_State->setObjectName(QStringLiteral("actionSave_UI_State"));
-        actionLoad_UI_State = new QAction(MainWindow);
-        actionLoad_UI_State->setObjectName(QStringLiteral("actionLoad_UI_State"));
-        actionRefresh_Micro = new QAction(MainWindow);
-        actionRefresh_Micro->setObjectName(QStringLiteral("actionRefresh_Micro"));
+        actionRefresh_uC = new QAction(MainWindow);
+        actionRefresh_uC->setObjectName(QStringLiteral("actionRefresh_uC"));
+        actionRead_Analog0_Latch = new QAction(MainWindow);
+        actionRead_Analog0_Latch->setObjectName(QStringLiteral("actionRead_Analog0_Latch"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBox_10 = new QGroupBox(centralWidget);
@@ -1714,6 +1729,84 @@ public:
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
+        groupBox_14 = new QGroupBox(tab_3);
+        groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
+        groupBox_14->setGeometry(QRect(10, 10, 141, 111));
+        gridLayoutWidget_10 = new QWidget(groupBox_14);
+        gridLayoutWidget_10->setObjectName(QStringLiteral("gridLayoutWidget_10"));
+        gridLayoutWidget_10->setGeometry(QRect(10, 20, 121, 51));
+        gridLayout_11 = new QGridLayout(gridLayoutWidget_10);
+        gridLayout_11->setSpacing(6);
+        gridLayout_11->setContentsMargins(11, 11, 11, 11);
+        gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        gridLayout_11->setContentsMargins(0, 0, 0, 0);
+        label_64 = new QLabel(gridLayoutWidget_10);
+        label_64->setObjectName(QStringLiteral("label_64"));
+        QFont font2;
+        font2.setBold(true);
+        font2.setWeight(75);
+        label_64->setFont(font2);
+        label_64->setAlignment(Qt::AlignCenter);
+
+        gridLayout_11->addWidget(label_64, 0, 1, 1, 1);
+
+        label_63 = new QLabel(gridLayoutWidget_10);
+        label_63->setObjectName(QStringLiteral("label_63"));
+        label_63->setFont(font2);
+        label_63->setAlignment(Qt::AlignCenter);
+
+        gridLayout_11->addWidget(label_63, 0, 0, 1, 1);
+
+        label_65 = new QLabel(gridLayoutWidget_10);
+        label_65->setObjectName(QStringLiteral("label_65"));
+        label_65->setFont(font2);
+        label_65->setAlignment(Qt::AlignCenter);
+
+        gridLayout_11->addWidget(label_65, 0, 2, 1, 1);
+
+        spinBox = new QSpinBox(gridLayoutWidget_10);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setMaximum(1);
+
+        gridLayout_11->addWidget(spinBox, 1, 0, 1, 1);
+
+        spinBox_2 = new QSpinBox(gridLayoutWidget_10);
+        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
+        spinBox_2->setMaximum(1);
+
+        gridLayout_11->addWidget(spinBox_2, 1, 1, 1, 1);
+
+        spinBox_3 = new QSpinBox(gridLayoutWidget_10);
+        spinBox_3->setObjectName(QStringLiteral("spinBox_3"));
+        spinBox_3->setMaximum(1);
+
+        gridLayout_11->addWidget(spinBox_3, 1, 2, 1, 1);
+
+        horizontalLayoutWidget_9 = new QWidget(groupBox_14);
+        horizontalLayoutWidget_9->setObjectName(QStringLiteral("horizontalLayoutWidget_9"));
+        horizontalLayoutWidget_9->setGeometry(QRect(10, 80, 121, 21));
+        horizontalLayout_22 = new QHBoxLayout(horizontalLayoutWidget_9);
+        horizontalLayout_22->setSpacing(6);
+        horizontalLayout_22->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
+        horizontalLayout_22->setContentsMargins(0, 0, 0, 0);
+        label_66 = new QLabel(horizontalLayoutWidget_9);
+        label_66->setObjectName(QStringLiteral("label_66"));
+
+        horizontalLayout_22->addWidget(label_66);
+
+        lineEdit_27 = new QLineEdit(horizontalLayoutWidget_9);
+        lineEdit_27->setObjectName(QStringLiteral("lineEdit_27"));
+        lineEdit_27->setEnabled(false);
+
+        horizontalLayout_22->addWidget(lineEdit_27);
+
+        groupBox_15 = new QGroupBox(tab_3);
+        groupBox_15->setObjectName(QStringLiteral("groupBox_15"));
+        groupBox_15->setGeometry(QRect(10, 130, 141, 51));
+        comboBox_5 = new QComboBox(groupBox_15);
+        comboBox_5->setObjectName(QStringLiteral("comboBox_5"));
+        comboBox_5->setGeometry(QRect(10, 20, 121, 22));
         tabWidget->addTab(tab_3, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QStringLiteral("tab_6"));
@@ -1725,7 +1818,10 @@ public:
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem3);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        tableWidget_2->setGeometry(QRect(210, 130, 231, 201));
+        tableWidget_2->setGeometry(QRect(440, 30, 231, 201));
+        pushButton_24 = new QPushButton(tab_6);
+        pushButton_24->setObjectName(QStringLiteral("pushButton_24"));
+        pushButton_24->setGeometry(QRect(10, 10, 141, 51));
         tabWidget->addTab(tab_6, QString());
         groupBox_6 = new QGroupBox(centralWidget);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
@@ -1801,6 +1897,8 @@ public:
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
+        menuDebug_2 = new QMenu(menuBar);
+        menuDebug_2->setObjectName(QStringLiteral("menuDebug_2"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -1811,11 +1909,17 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuHelp->menuAction());
-        menuFile->addAction(actionRefresh_Micro);
+        menuBar->addAction(menuDebug_2->menuAction());
+        menuDebug_2->addAction(actionRefresh_uC);
+        menuDebug_2->addAction(actionRead_Analog0_Latch);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+<<<<<<< HEAD
+        tabWidget->setCurrentIndex(4);
+=======
+        tabWidget->setCurrentIndex(5);
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1824,9 +1928,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "TM1100 Thermal Management Unit", Q_NULLPTR));
-        actionSave_UI_State->setText(QApplication::translate("MainWindow", "Save UI State", Q_NULLPTR));
-        actionLoad_UI_State->setText(QApplication::translate("MainWindow", "Load UI State", Q_NULLPTR));
-        actionRefresh_Micro->setText(QApplication::translate("MainWindow", "Refresh Micro", Q_NULLPTR));
+        actionRefresh_uC->setText(QApplication::translate("MainWindow", "Refresh uC", Q_NULLPTR));
+        actionRead_Analog0_Latch->setText(QApplication::translate("MainWindow", "Read Analog0 Latch", Q_NULLPTR));
         groupBox_10->setTitle(QApplication::translate("MainWindow", "Information", Q_NULLPTR));
         groupBox_3->setTitle(QString());
         label_2->setText(QApplication::translate("MainWindow", "Gain Resistor", Q_NULLPTR));
@@ -1950,12 +2053,19 @@ public:
         label_40->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:11pt; font-weight:600; color:#0f4b96;\">Sawtooth Sweep</span></p></body></html>", Q_NULLPTR));
         infoButton_SawtoothSweep->setText(QApplication::translate("MainWindow", "i ", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Temperature Cycle Demo", Q_NULLPTR));
+        groupBox_14->setTitle(QApplication::translate("MainWindow", "I2C Bus Mux Address", Q_NULLPTR));
+        label_64->setText(QApplication::translate("MainWindow", "A1", Q_NULLPTR));
+        label_63->setText(QApplication::translate("MainWindow", "A2", Q_NULLPTR));
+        label_65->setText(QApplication::translate("MainWindow", "A0", Q_NULLPTR));
+        label_66->setText(QApplication::translate("MainWindow", "Mux Addr", Q_NULLPTR));
+        groupBox_15->setTitle(QApplication::translate("MainWindow", "Heat Gradient Profile", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Gradient Demo", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Name", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->horizontalHeaderItem(1);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Value", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Page", Q_NULLPTR));
+        pushButton_24->setText(QApplication::translate("MainWindow", "Read Analog 0 Latch", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Debug", Q_NULLPTR));
         groupBox_6->setTitle(QApplication::translate("MainWindow", "Device Info", Q_NULLPTR));
         label_29->setText(QApplication::translate("MainWindow", "OTP Programmed:", Q_NULLPTR));
         label_27->setText(QApplication::translate("MainWindow", "TMU Detected:", Q_NULLPTR));
@@ -1971,6 +2081,7 @@ public:
         label_42->setText(QApplication::translate("MainWindow", "Rev 1.0", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
+        menuDebug_2->setTitle(QApplication::translate("MainWindow", "Debug", Q_NULLPTR));
     } // retranslateUi
 
 };

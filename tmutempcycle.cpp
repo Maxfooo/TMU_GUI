@@ -59,7 +59,6 @@ void TMUTempCycle::updateHeatLatch()
 
     // EMIT A SIGNAL--WITH PARAMETER TMU_ID--TO HAVE THE MAINWINDOW
     // COMMUNICATE TO THE CORRECT TMU
-    // THIS WILL BE USING THE I2C BUS MUTLIPLEXOR
     emit this->updateTMU(this->id);
 
     this->start();

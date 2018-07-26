@@ -10,6 +10,7 @@ INPUT(
 ./release\tmudaemon.o
 ./release\tmutempcycle.o
 ./release\processrunningle.o
+./release\tmuheatgradient.o
 ./release\qrc_tmu_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_hxusbcomm.o

@@ -153,6 +153,13 @@
 
 // --------------------------------------------
 
+enum {
+    TMU_WRITE,
+    TMU_READ,
+    TMU_WRITE_READ,
+    TMU_DEBUG1,
+    TMU_DEBUG2
+};
 
 
 

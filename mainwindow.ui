@@ -55,7 +55,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+<<<<<<< HEAD
+     <number>4</number>
+=======
+     <number>5</number>
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -2038,16 +2042,162 @@ font-style:italic;
      <attribute name="title">
       <string>Gradient Demo</string>
      </attribute>
+     <widget class="QGroupBox" name="groupBox_14">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>141</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>I2C Bus Mux Address</string>
+      </property>
+      <widget class="QWidget" name="gridLayoutWidget_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>121</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_64">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>A1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_63">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>A2</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_65">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>A0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QSpinBox" name="spinBox">
+          <property name="maximum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="spinBox_2">
+          <property name="maximum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="spinBox_3">
+          <property name="maximum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="horizontalLayoutWidget_9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_22">
+        <item>
+         <widget class="QLabel" name="label_66">
+          <property name="text">
+           <string>Mux Addr</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_27">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_15">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Heat Gradient Profile</string>
+      </property>
+      <widget class="QComboBox" name="comboBox_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>121</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
-      <string>Page</string>
+      <string>Debug</string>
      </attribute>
      <widget class="QTableWidget" name="tableWidget_2">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>130</y>
+        <x>440</x>
+        <y>30</y>
         <width>231</width>
         <height>201</height>
        </rect>
@@ -2062,6 +2212,19 @@ font-style:italic;
         <string>Value</string>
        </property>
       </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_24">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Read Analog 0 Latch</string>
+      </property>
      </widget>
     </widget>
    </widget>
@@ -2222,15 +2385,22 @@ font-style:italic;
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionRefresh_Micro"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuDebug_2">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="actionRefresh_uC"/>
+    <addaction name="actionRead_Analog0_Latch"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuDebug_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -2241,19 +2411,14 @@ font-style:italic;
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSave_UI_State">
+  <action name="actionRefresh_uC">
    <property name="text">
-    <string>Save UI State</string>
+    <string>Refresh uC</string>
    </property>
   </action>
-  <action name="actionLoad_UI_State">
+  <action name="actionRead_Analog0_Latch">
    <property name="text">
-    <string>Load UI State</string>
-   </property>
-  </action>
-  <action name="actionRefresh_Micro">
-   <property name="text">
-    <string>Refresh Micro</string>
+    <string>Read Analog0 Latch</string>
    </property>
   </action>
  </widget>

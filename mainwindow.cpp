@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initTMUs();
     initTMUDaemons();
     initTempCycleTMUs();
+    initTMUHeatGrad();
 
     /****** Setup USB Communication ******/
     hxUSBComm = new HxUSBComm;
@@ -40,10 +41,11 @@ MainWindow::MainWindow(QWidget *parent) :
     TEMP_CYCLE_PROFILE_FILE_NAME.prepend(CONFIG_FILE_PREFIX);
     saveMyUI = new SaveMyUI(this, mySettings);
 
-    /****** INIT COMBO BOXES ******/
+    /****** INIT TABS ******/
     initGeneralConfigTab();
     initTempCycleTab();
     initAdvancedTab();
+    initHeatGradientTab();
 
     /****** INIT MISC ******/
     procRunLE = new ProcessRunningLE(ui->lineEdit_26, procRunPeriod);
@@ -93,6 +95,11 @@ void MainWindow::initTempCycleTMUs()
         tmuTempCycle[i] = new TMUTempCycle(i, tmu[i], this);
         connect(tmuTempCycle[i], SIGNAL(updateTMU(uchar)), this, SLOT(wrRegSlot(uchar)));
     }
+}
+
+void MainWindow::initTMUHeatGrad()
+{
+    tmuHeatGrad = new TmuHeatGradient();
 }
 
 void MainWindow::on_pushButton_3_clicked() // Program OTP
@@ -229,7 +236,7 @@ void MainWindow::updateDataInfo()
     }
 }
 
-void MainWindow::handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx)
+void MainWindow::handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx, uchar tmuPos)
 {
 
     ////////////////////
@@ -241,11 +248,25 @@ void MainWindow::handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx)
     // <Byte0, Byte1, Byte2, ...>
     // <Checksum>
     ////////////////////
+    /*
+     * =PACKET STRUCTURE=
+       MODE : [0xhh
+       SLAVE_ADDR : 0xhh,
+       MUX_ADDR : 0xhh,
+       TMU_POS : 0xhh,
+       NUM_TX : 0xhh,
+       NUM_RX : 0xhh,
+       {TXB0, TXB1, ... , TXBN},
+       CHECKSUM : 0xhh]
+     */
 
     uchar cmdByte = HX_PKT_I2C;
     txIndex = 0;
-    txBuffer[txIndex++] = HX_I2C_WR_RD_MODE;
+    //txBuffer[txIndex++] = HX_I2C_WR_RD_MODE;
+    txBuffer[txIndex++] = TMU_WRITE_READ;
     txBuffer[txIndex++] = I2C_ADDRESS;
+    txBuffer[txIndex++] = tmuPos; // mux address
+    txBuffer[txIndex++] = I2CMuxAddr; // tmu position (Updated automatically (in heat gradient tab))
     txBuffer[txIndex++] = numOfTx;
     txBuffer[txIndex++] = numOfRx;
     for (int i = 0; i < numOfTx; i++)
@@ -282,7 +303,7 @@ void MainWindow::writeRegFromInterface(uchar id)
     }
     else
     {
-        handleI2CWrite(tmuTxPkt[tmu_index++], SIZE_OF_TX_LATCH_PKT, 3);
+        handleI2CWrite(tmuTxPkt[tmu_index++], SIZE_OF_TX_LATCH_PKT, 3, id);
     }
 }
 
@@ -322,15 +343,19 @@ void MainWindow::detectTMUWrite(uchar id)
 {
     readbackID = id;
     setTMUChannel(id);
-
+    commState = COMM_DETECT_DUT_RD;
 #ifdef DEBUG
     uchar rxROM[5] = {CMD_RD_ROM, 0x01, 0x00, 1, 0};
     rxROM[4] = HxUtils::calcChecksum(rxROM, 4);
-    handleI2CWrite(rxROM, 5, 3);
+    handleI2CWrite(rxROM, 5, 3, id);
     // Works, returns 0x0B for address 0x0001, which is correct
 #else
+<<<<<<< HEAD
     commState = COMM_DETECT_DUT_RD;
-    handleI2CWrite(tmu->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
+    handleI2CWrite(tmu->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3, id);
+=======
+    handleI2CWrite(tmu[PRIMARY_TMU_ID]->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 #endif
 }
 
@@ -1715,11 +1740,94 @@ void MainWindow::on_infoButton_ThermalParameters_clicked()
 }
 
 //////////////////////////////////////
-// TOOL BAR ACTIONS
+// TOOL BAR ACTIONS AND DEBUG TAB
 //////////////////////////////////////
 
-void MainWindow::on_actionRefresh_Micro_triggered()
+
+void MainWindow::on_actionRefresh_uC_triggered()
 {
     refreshMicro();
 }
 
+<<<<<<< HEAD
+//////////////////////////////////////
+// HEAT GRADIENT TAB
+//////////////////////////////////////
+
+void MainWindow::initHeatGradientTab()
+{
+    QStringList gradProfiles = tmuHeatGrad->getGradProfNames();
+    for (int i = 0; i < gradProfiles.size(); i++)
+    {
+        ui->comboBox_5->insertItem(i, gradProfiles.at(i));
+    }
+
+
+}
+
+void MainWindow::on_spinBox_valueChanged(int arg1) // I2C Mux A2
+{
+    if (arg1)
+    {
+        I2CMuxAddr |= 0x4;
+    }
+    else
+    {
+        I2CMuxAddr &= 0xB;
+    }
+    updateMuxAddr();
+}
+
+void MainWindow::on_spinBox_2_valueChanged(int arg1) // I2C Mux A1
+{
+    if (arg1)
+    {
+        I2CMuxAddr |= 0x2;
+    }
+    else
+    {
+        I2CMuxAddr &= 0xD;
+    }
+    updateMuxAddr();
+}
+
+void MainWindow::on_spinBox_3_valueChanged(int arg1) // I2C Mux A0
+{
+    if (arg1)
+    {
+        I2CMuxAddr |= 0x1;
+    }
+    else
+    {
+        I2CMuxAddr &= 0xE;
+    }
+    updateMuxAddr();
+}
+
+void MainWindow::updateMuxAddr()
+{
+    ui->lineEdit_27->setText(QString("%1").arg(I2CMuxAddr, 7, 2, QChar('0')));
+}
+
+void MainWindow::on_comboBox_5_currentIndexChanged(int index) // Heat Gradient Profile
+{
+
+=======
+
+void MainWindow::on_actionRead_Analog0_Latch_triggered()
+{
+    uchar rxAnalog0[SIZE_OF_RX_LATCH_PKT] = {CMD_READ_LATCH, ANALOG_0_NUM, 0};
+    rxAnalog0[2] = HxUtils::calcChecksum(rxAnalog0, SIZE_OF_RX_LATCH_PKT-1);
+    commState = COMM_IDLE;
+    handleI2CWrite(rxAnalog0, SIZE_OF_RX_LATCH_PKT, 3);
+}
+
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    uchar rxAnalog0[SIZE_OF_RX_LATCH_PKT] = {CMD_READ_LATCH, ANALOG_0_NUM, 0};
+    rxAnalog0[2] = HxUtils::calcChecksum(rxAnalog0, SIZE_OF_RX_LATCH_PKT-1);
+    commState = COMM_IDLE;
+    handleI2CWrite(rxAnalog0, SIZE_OF_RX_LATCH_PKT, 3);
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+}

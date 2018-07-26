@@ -12,6 +12,7 @@
 #include "processrunningle.h"
 #include "tmudaemon.h"
 #include "tmutempcycle.h"
+#include "tmuheatgradient.h"
 
 #define CONFIG_FILE_NAMES_DELIMETER "$"
 
@@ -34,7 +35,7 @@ typedef enum CommState {
 };
 
 enum {
-    TMU_LOW_LEFT,
+    TMU_LOW_LEFT = 1,
     TMU_LOW_MID,
     TMU_LOW_RIGHT,
     TMU_MID_LEFT,
@@ -174,8 +175,6 @@ private slots:
 
     void updateDataInfo();
 
-    void on_actionRefresh_Micro_triggered();
-
     void on_lineEdit_3_editingFinished();
 
     void on_lineEdit_4_editingFinished();
@@ -199,6 +198,23 @@ private slots:
     void on_pushButton_22_clicked();
 
     void on_pushButton_23_clicked();
+
+<<<<<<< HEAD
+    void on_spinBox_valueChanged(int arg1);
+
+    void on_spinBox_2_valueChanged(int arg1);
+
+    void on_spinBox_3_valueChanged(int arg1);
+
+    void on_comboBox_5_currentIndexChanged(int index);
+=======
+    void on_actionRefresh_uC_triggered();
+
+    void on_actionRead_Analog0_Latch_triggered();
+
+
+    void on_pushButton_24_clicked();
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
 public slots:
     void updateDirectGUI();
@@ -244,8 +260,9 @@ private:
     TmuTxPkt readbackPkt;
     uchar tmu_index;
 
+
     // Comm functions
-    void handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx);
+    void handleI2CWrite(uchar* data, uchar numOfTx, uchar numOfRx, uchar tmuPos);
     void writeRegFromInterface(uchar id);
     void readRegToInterface(uchar id);
     void fillReadbackPacket(uchar id);
@@ -261,15 +278,19 @@ private:
     TMU* tmu[NUM_OF_TMUS];
     TMUDaemon* tmuDaemon[NUM_OF_TMUS];
     TMUTempCycle* tmuTempCycle[NUM_OF_TMUS];
+    TmuHeatGradient* tmuHeatGrad;
     TempCycleState tempCycleState = TEMP_CYCLE_STOP;
     uchar readbackID = PRIMARY_TMU_ID;
+    uchar I2CMuxAddr = 0;
 
     void initGeneralConfigTab();
     void initTempCycleTab();
     void initTMUs();
     void initTMUDaemons();
     void initTempCycleTMUs();
+    void initTMUHeatGrad();
     void initAdvancedTab();
+    void initHeatGradientTab();
     void updateAdvancedTab();
     void post(QString s);
     void enableIHBox();
@@ -278,6 +299,7 @@ private:
     void importHex();
     void updateGeneralTab();
     void setupTMUTempCycle(TMUTempCycle* ttc);
+    void updateMuxAddr();
 
     void saveConfigFileName(QString fname);
     void removeConfigFileName(QString fname);
