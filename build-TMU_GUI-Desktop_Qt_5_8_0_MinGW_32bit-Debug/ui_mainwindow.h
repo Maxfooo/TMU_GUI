@@ -1916,7 +1916,11 @@ public:
         retranslateUi(MainWindow);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         tabWidget->setCurrentIndex(4);
+=======
+        tabWidget->setCurrentIndex(5);
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
         tabWidget->setCurrentIndex(5);
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356

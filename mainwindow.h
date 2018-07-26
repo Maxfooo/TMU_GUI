@@ -200,6 +200,7 @@ private slots:
     void on_pushButton_23_clicked();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     void on_spinBox_valueChanged(int arg1);
 
     void on_spinBox_2_valueChanged(int arg1);
@@ -208,12 +209,17 @@ private slots:
 
     void on_comboBox_5_currentIndexChanged(int index);
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
     void on_actionRefresh_uC_triggered();
 
     void on_actionRead_Analog0_Latch_triggered();
 
 
     void on_pushButton_24_clicked();
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
 public slots:

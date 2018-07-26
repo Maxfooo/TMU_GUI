@@ -351,8 +351,12 @@ void MainWindow::detectTMUWrite(uchar id)
     // Works, returns 0x0B for address 0x0001, which is correct
 #else
 <<<<<<< HEAD
+<<<<<<< HEAD
     commState = COMM_DETECT_DUT_RD;
     handleI2CWrite(tmu->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3, id);
+=======
+    handleI2CWrite(tmu[PRIMARY_TMU_ID]->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     handleI2CWrite(tmu[PRIMARY_TMU_ID]->asic_rev_sfr.rxPkt, SIZE_OF_RX_LATCH_PKT, 3);
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
@@ -1750,6 +1754,7 @@ void MainWindow::on_actionRefresh_uC_triggered()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //////////////////////////////////////
 // HEAT GRADIENT TAB
 //////////////////////////////////////
@@ -1813,6 +1818,8 @@ void MainWindow::on_comboBox_5_currentIndexChanged(int index) // Heat Gradient P
 {
 
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
 void MainWindow::on_actionRead_Analog0_Latch_triggered()
 {
@@ -1829,5 +1836,8 @@ void MainWindow::on_pushButton_24_clicked()
     rxAnalog0[2] = HxUtils::calcChecksum(rxAnalog0, SIZE_OF_RX_LATCH_PKT-1);
     commState = COMM_IDLE;
     handleI2CWrite(rxAnalog0, SIZE_OF_RX_LATCH_PKT, 3);
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 }

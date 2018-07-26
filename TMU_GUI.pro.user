@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.2.1, 2018-07-25T12:07:44. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{2a478351-bb49-49f6-9b83-ab9ce67b356a}</value>
+=======
+<!-- Written by QtCreator 4.4.1, 2018-05-21T14:11:28. -->
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{f6255536-1105-4bdc-8572-543a4aaeed7a}</value>
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
 <!-- Written by QtCreator 4.4.1, 2018-05-21T14:11:28. -->
 <qtcreator>
@@ -75,7 +83,11 @@
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
@@ -299,7 +311,11 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">TMU_GUI</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI/TMU_GUI.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/TMU_GUI.pro</value>
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/TMU_GUI.pro</value>
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
@@ -309,7 +325,11 @@
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/maxr/Desktop/TMU/SOFTWARE/GUI/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
+=======
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/administrator/Desktop/MAX_WORKSPACE/TMU/TMU_GUI/build-TMU_GUI-Desktop_Qt_5_8_0_MinGW_32bit-Debug</value>
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356

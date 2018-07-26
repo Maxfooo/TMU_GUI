@@ -22,8 +22,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
 <<<<<<< HEAD
+<<<<<<< HEAD
     QByteArrayData data[83];
     char stringdata0[2165];
+=======
+    QByteArrayData data[80];
+    char stringdata0[2110];
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     QByteArrayData data[80];
     char stringdata0[2110];
@@ -93,6 +98,7 @@ QT_MOC_LITERAL(53, 1501, 30), // "on_lineEdit_24_editingFinished"
 QT_MOC_LITERAL(54, 1532, 30), // "on_lineEdit_25_editingFinished"
 QT_MOC_LITERAL(55, 1563, 14), // "updateDataInfo"
 <<<<<<< HEAD
+<<<<<<< HEAD
 QT_MOC_LITERAL(56, 1578, 32), // "on_actionRefresh_Micro_triggered"
 QT_MOC_LITERAL(57, 1611, 29), // "on_lineEdit_3_editingFinished"
 QT_MOC_LITERAL(58, 1641, 29), // "on_lineEdit_4_editingFinished"
@@ -121,6 +127,8 @@ QT_MOC_LITERAL(80, 2142, 9), // "wrRegSlot"
 QT_MOC_LITERAL(81, 2152, 2), // "id"
 QT_MOC_LITERAL(82, 2155, 9) // "rdRegSlot"
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 QT_MOC_LITERAL(56, 1578, 29), // "on_lineEdit_3_editingFinished"
 QT_MOC_LITERAL(57, 1608, 29), // "on_lineEdit_4_editingFinished"
 QT_MOC_LITERAL(58, 1638, 29), // "on_lineEdit_5_editingFinished"
@@ -145,6 +153,9 @@ QT_MOC_LITERAL(76, 2076, 10), // "reportBusy"
 QT_MOC_LITERAL(77, 2087, 9), // "wrRegSlot"
 QT_MOC_LITERAL(78, 2097, 2), // "id"
 QT_MOC_LITERAL(79, 2100, 9) // "rdRegSlot"
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
     },
@@ -210,6 +221,7 @@ QT_MOC_LITERAL(79, 2100, 9) // "rdRegSlot"
     "on_pushButton_22_clicked\0"
     "on_pushButton_23_clicked\0"
 <<<<<<< HEAD
+<<<<<<< HEAD
     "on_spinBox_valueChanged\0arg1\0"
     "on_spinBox_2_valueChanged\0"
     "on_spinBox_3_valueChanged\0"
@@ -219,6 +231,8 @@ QT_MOC_LITERAL(79, 2100, 9) // "rdRegSlot"
     "reportError\0reportBusy\0wrRegSlot\0id\0"
     "rdRegSlot"
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
     "on_actionRefresh_uC_triggered\0"
     "on_actionRead_Analog0_Latch_triggered\0"
     "on_pushButton_24_clicked\0updateDirectGUI\0"
@@ -236,7 +250,11 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // classname
        0,    0, // classinfo
 <<<<<<< HEAD
+<<<<<<< HEAD
       77,   14, // methods
+=======
+      75,   14, // methods
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
       75,   14, // methods
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
@@ -247,6 +265,7 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
+<<<<<<< HEAD
 <<<<<<< HEAD
        1,    0,  399,    2, 0x08 /* Private */,
        3,    0,  400,    2, 0x08 /* Private */,
@@ -326,6 +345,8 @@ static const uint qt_meta_data_MainWindow[] = {
       80,    1,  498,    2, 0x0a /* Public */,
       82,    1,  501,    2, 0x0a /* Public */,
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
        1,    0,  389,    2, 0x08 /* Private */,
        3,    0,  390,    2, 0x08 /* Private */,
        4,    0,  391,    2, 0x08 /* Private */,
@@ -401,6 +422,9 @@ static const uint qt_meta_data_MainWindow[] = {
       76,    0,  477,    2, 0x0a /* Public */,
       77,    1,  478,    2, 0x0a /* Public */,
       79,    1,  481,    2, 0x0a /* Public */,
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 
  // slots: parameters
@@ -475,12 +499,24 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
 <<<<<<< HEAD
+<<<<<<< HEAD
     QMetaType::Void, 0x80000000 | 76,    2,
     QMetaType::Void, QMetaType::Bool,    2,
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
     QMetaType::Void, QMetaType::UChar,   81,
     QMetaType::Void, QMetaType::UChar,   81,
+=======
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 73,    2,
+    QMetaType::Void, QMetaType::Bool,    2,
+    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::UChar,   78,
+    QMetaType::Void, QMetaType::UChar,   78,
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
 =======
     QMetaType::Void,
     QMetaType::Void,
@@ -556,6 +592,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 51: _t->on_lineEdit_25_editingFinished(); break;
         case 52: _t->updateDataInfo(); break;
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 53: _t->on_actionRefresh_Micro_triggered(); break;
         case 54: _t->on_lineEdit_3_editingFinished(); break;
         case 55: _t->on_lineEdit_4_editingFinished(); break;
@@ -581,6 +618,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 75: _t->wrRegSlot((*reinterpret_cast< uchar(*)>(_a[1]))); break;
         case 76: _t->rdRegSlot((*reinterpret_cast< uchar(*)>(_a[1]))); break;
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
         case 53: _t->on_lineEdit_3_editingFinished(); break;
         case 54: _t->on_lineEdit_4_editingFinished(); break;
         case 55: _t->on_lineEdit_5_editingFinished(); break;
@@ -603,6 +642,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 72: _t->reportBusy(); break;
         case 73: _t->wrRegSlot((*reinterpret_cast< uchar(*)>(_a[1]))); break;
         case 74: _t->rdRegSlot((*reinterpret_cast< uchar(*)>(_a[1]))); break;
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
         default: ;
         }
@@ -635,6 +677,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (_id < 77)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 77;
@@ -643,6 +686,8 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 77;
 =======
+=======
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
         if (_id < 75)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 75;
@@ -650,6 +695,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 75)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 75;
+<<<<<<< HEAD
+>>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
+=======
 >>>>>>> 5fbce2f4a39e4f3d8d8e25bd3749563883179356
     }
     return _id;
